@@ -1,0 +1,239 @@
+:root{
+  --primary-main : #F5F5F5;
+  --color-1 : #F2EAD3;
+  --color-2 : #DFD7BF;
+  --color-3 : #3F2305;
+}
+/* styles.css */
+.body-customer {
+  /* width: 1150px; */
+  width: 100%;
+  height: fit-content;
+  margin: 0px auto;
+}
+.body-admin {
+  padding-top: 10vh;
+  width: 1920px;
+  height: 90vh;
+  overflow-y: scroll;
+  margin: 0px auto;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+div.inline {
+  display: inline-block;
+}
+figure.caption-right {
+  display: flex;
+  align-items: center;
+}
+.align-valign-center .align-center{
+  margin-top: 5 0px;
+  width: 100%;
+  height: 170px;
+  display: flexbox;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.align-valign-center .align-center tr{
+  display: flexbox;
+}
+.align-valign-center .align-center .input_value{
+  width: 200px;
+  padding: 7px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background-color: var(--color-1);
+}
+.align-valign-center .align-center .input_value:hover{
+  background-color: var(--color-3);
+  color: var(--primary-main);
+}
+.align-valign-center .align-center .btn_submit{
+  width: 140px;
+  align-items: center;
+  cursor: pointer;
+  height: 35px;
+  font-weight: bold;
+}
+.align-valign-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0px 20px 20px 20px;
+  box-shadow: 0 0 4px #000;
+  border-radius: 10px;
+  width: 350px;
+  height: 500px;
+  background-color: var(--primary-main);
+  color: #000;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+}
+.text-center {
+  text-align: center;
+  color: var(--color-3);
+  font-weight: bold;
+  margin: 25px 0px 25px 0px;
+}
+span.link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+/* menu.css */
+div.border-bottom {
+  border-bottom: 1px solid black;
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: var(--color-1);
+}
+div.float-left {
+  float: left;
+}
+div.float-right--menu {
+  float: right;
+  padding-right: 40px;
+  line-height: 10vh;
+}
+div.float-right--menu a{
+  color: var(--color-3); 
+  text-decoration: none;
+  cursor: pointer;
+}
+div.float-right--menu a:hover{
+  color: blue;
+}
+div.float-right {
+  float: right;
+  padding-right: 40px;
+}
+
+div.float-right form{
+  box-shadow: 0 0 2px #000;
+  background-color: var(--color-1);
+  width: 100%;
+}
+div.float-right form .submit_value{
+  background-color: #000;
+}
+div.float-clear {
+  clear: both;
+}
+ul.menu {
+  margin: 0px;
+  margin-left: 10%;
+  width: 100%;
+}
+li.menu {
+  display: inline;
+  text-transform: uppercase;
+}
+li.menu a{
+  display: inline-block;
+  width: 100px;
+  text-decoration: none;
+  height: 10vh;
+  text-align: center;
+  line-height: 10vh; /* Đặt line-height bằng chiều cao của thẻ */
+}
+li.menu a:hover {
+  background-color: var(--color-3);
+  color: white;
+}
+form.search {
+  margin: 0px;
+}
+input.keyword {
+  width: 110px;
+}
+/* datatable.css */
+table.datatable{
+  margin-left: 10%;
+  width: 80%;
+  margin-right: 10%;
+}
+.datatable {
+  box-shadow: 0 0px 4px var(--color-3);
+  text-align: center;
+  border-collapse: collapse;
+  height: 10vh;
+}
+/* header */
+tr:first-child.datatable {
+  background-color: var(--color-2);
+  height: 5vh;
+}
+/* even rows, except header */
+tr:not(:first-child):nth-child(even).datatable {
+  background-color: var(--primary-main);
+}
+/* odd rows, except header */
+tr:not(:first-child):nth-child(odd).datatable {
+  background-color: var(--color-1);
+}
+/* except header */
+tr:not(:first-child):hover.datatable {
+  background-color: var(--color-3);
+  cursor: pointer;
+  color: var(--primary-main);
+}
+
+.body-admin{
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  background-color: var(--primary-main);
+}
+.main__home--menu{
+  position: relative;
+  margin-left: 20%;
+  margin-top: 7%;
+}
+.main__home--menu .main__a--wrap{
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+
+.main__home--menu a{
+  text-decoration: none;
+  display: inline-block;
+  height: 80px;
+  width: 200px;
+  border-radius: 10%;
+  box-shadow:  0px 0px 2px var(--color-3);
+  cursor: pointer;
+  line-height: 80px;
+  text-align: center;
+}
+.main__home--menu a:hover{
+  background-color: var(--color-3);color: var(--primary-main);
+}
+.logo{
+  background-image: url("./logo.PNG");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 7vh;
+  height: 10vh;
+  width: 10vh;
+  position: absolute;
+}
+.align-content--wrap{
+  
+}
+.align-content--wrap .float-left .datatable td {
+  /* background-color: #000; */
+}
+.login_logo{
+  position:static;
+  width: 100%;
+  height: 100px;
+  margin: 0;
+  padding: 10% 0 0 0;
+  background-size: 100px;
+  cursor: pointer;
+}
