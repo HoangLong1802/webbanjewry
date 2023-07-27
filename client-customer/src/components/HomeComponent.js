@@ -47,22 +47,15 @@ class Home extends Component {
     });
     return (
       <div>
-        <div className="align-center">
+        <div className="align-center home__align--wrap">
           <h2 className="text-center">NEW PRODUCTS</h2>
           <div className="product_control">
             <div className="product">
-            {newprods}
-            {newprods}
-            {newprods}
-            {newprods}
-            {newprods}
-            {newprods}
-            {newprods}
-            {newprods}
+            {newprods}{newprods}{newprods}{newprods}{newprods}{newprods}{newprods}
               </div>
           </div>
         </div>
-        <div className="align-center">
+        <div className="align-center  home__align--wrap">
           <h2 className="text-center">HOT PRODUCTS</h2>
           <div className="product_control">{this.check(hotprods)}</div>
         </div>

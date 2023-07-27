@@ -16,20 +16,20 @@ class Login extends Component {
     return (
       <div className="align-center">
         <h2 className="text-center">CUSTOMER LOGIN</h2>
-        <form>
-          <table className="align-center">
+        <form className="css_table--wrap">
+          <table className='table__content--wrap'>
             <tbody>
               <tr>
-                <td>Username</td>
-                <td><input type="text" value={this.state.txtUsername} onChange={(e) => { this.setState({ txtUsername: e.target.value }) }} /></td>
+                <td>Username: </td>
+                <td className='input__css--wrap'><input type="text" value={this.state.txtUsername} onChange={(e) => { this.setState({ txtUsername: e.target.value }) }} /></td>
               </tr>
               <tr>
-                <td>Password</td>
-                <td><input type="password" value={this.state.txtPassword} onChange={(e) => { this.setState({ txtPassword: e.target.value }) }} /></td>
+                <td>Password: </td>
+                <td className='input__css--wrap'><input type="password" value={this.state.txtPassword} onChange={(e) => { this.setState({ txtPassword: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td></td>
-                <td><input type="submit" value="LOGIN" onClick={(e) => this.btnLoginClick(e)} /></td>
+                <td className='inbtn__css--wrap'><input type="submit" value="LOGIN" onClick={(e) => this.btnLoginClick(e)} /></td>
               </tr>
             </tbody>
           </table>

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-
 class Active extends Component {
   constructor(props) {
     super(props);
@@ -13,20 +12,20 @@ class Active extends Component {
     return (
       <div className="align-center">
         <h2 className="text-center">ACTIVE ACCOUNT</h2>
-        <form>
-          <table className="align-center">
+        <form className='css_table--wrap'>
+          <table className="table__content--wrap">
             <tbody>
               <tr>
                 <td>ID</td>
-                <td><input type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} /></td>
+                <td className='input__css--wrap'><input type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td>Token</td>
-                <td><input type="text" value={this.state.txtToken} onChange={(e) => { this.setState({ txtToken: e.target.value }) }} /></td>
+                <td className='input__css--wrap'><input type="text" value={this.state.txtToken} onChange={(e) => { this.setState({ txtToken: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td></td>
-                <td><input type="submit" value="ACTIVE" onClick={(e) => this.btnActiveClick(e)} /></td>
+                <td className='inbtn__css--wrap'><input type="submit" value="ACTIVE" onClick={(e) => this.btnActiveClick(e)} /></td>
               </tr>
             </tbody>
           </table>
@@ -51,9 +50,9 @@ class Active extends Component {
     axios.post('/api/customer/active', body).then((res) => {
       const result = res.data;
       if (result) {
-        alert('OK BABY!');
+        alert('YOUR ACCOUNT HAVE BEEN ACTIVED!');
       } else {
-        alert('SORRY BABY!');
+        alert('WRONG ID OR TOKEN!\n PLEASE CHECK MAIL AGAIN!');
       }
     });
   }

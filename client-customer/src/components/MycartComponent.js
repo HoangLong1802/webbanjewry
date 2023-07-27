@@ -38,33 +38,48 @@ class Mycart extends Component {
     });
     return (
       <div className="align-center">
+
         <h2 className="text-center">ITEM LIST</h2>
-        <table className="datatable" border="1">
-          <tbody>
-            <tr className="datatable">
-              <th>No.</th>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Image</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Amount</th>
-              <th>Action</th>
-            </tr>
-            {mycart}
-            <tr>
-              <td colSpan="6"></td>
-              <td>Total</td>
-              <td>{CartUtil.getTotal(this.context.mycart)}</td>
-              <td>
-                <span className="link" onClick={() => this.lnkCheckoutClick()}>
-                  CHECKOUT
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        {CartUtil.getTotal(this.context.mycart) > 0 ? (
+          <table className="datatable" border="1">
+            <tbody>
+              <tr className="datatable">
+                <th>No.</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+              {mycart}
+              <tr>
+                  <td colSpan="6"></td>
+                  <td>Total</td>
+                  <td>{CartUtil.getTotal(this.context.mycart)}</td>
+                  <td>
+                  <span
+                    className="link"
+                    onClick={() => this.lnkCheckoutClick()}
+                    >
+                    CHECKOUT
+                  </span>
+                        </td>
+              </tr>
+            </tbody>
+          </table>
+        ) : (
+          <table className="datatable" border="1">
+            <tbody>
+              <tr className="datatable">
+                <h2>Don't have any product in your cart</h2>
+
+              </tr>
+              </tbody>
+              </table>
+        )}
       </div>
     );
   }
@@ -78,7 +93,7 @@ class Mycart extends Component {
     }
   }
   lnkCheckoutClick() {
-    if (window.confirm('ARE YOU SURE?')) {
+    if (window.confirm("ARE YOU SURE?")) {
       if (this.context.mycart.length > 0) {
         const total = CartUtil.getTotal(this.context.mycart);
         const items = this.context.mycart;
@@ -86,25 +101,25 @@ class Mycart extends Component {
         if (customer) {
           this.apiCheckout(total, items, customer);
         } else {
-          this.props.navigate('/login');
+          this.props.navigate("/login");
         }
       } else {
-        alert('Your cart is empty');
+        alert("Your cart is empty");
       }
     }
   }
   // apis
   apiCheckout(total, items, customer) {
     const body = { total: total, items: items, customer: customer };
-    const config = { headers: { 'x-access-token': this.context.token } };
-    axios.post('/api/customer/checkout', body, config).then((res) => {
+    const config = { headers: { "x-access-token": this.context.token } };
+    axios.post("/api/customer/checkout", body, config).then((res) => {
       const result = res.data;
       if (result) {
-        alert('OK BABY!');
+        alert("OK BABY!");
         this.context.setMycart([]);
-        this.props.navigate('/home');
+        this.props.navigate("/home");
       } else {
-        alert('SORRY BABY!');
+        alert("SORRY BABY!");
       }
     });
   }

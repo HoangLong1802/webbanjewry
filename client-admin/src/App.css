@@ -100,12 +100,12 @@ div.float-right--menu {
   line-height: 10vh;
 }
 div.float-right--menu a{
-  color: var(--color-3); 
   text-decoration: none;
   cursor: pointer;
+  color: blue;
 }
 div.float-right--menu a:hover{
-  color: blue;
+  color: var(--color-3); 
 }
 div.float-right {
   float: right;

@@ -22,11 +22,17 @@ class Product extends Component {
     return (
       <div className="text-center">
         <h2 className="text-center">LIST PRODUCTS</h2>
+      {prods == 0?(
+        
+        <h2 className="text-center"><br/>DON'T HAVE ANY PRODUCTS YET</h2>
+        ):
+        (
         <div className='product_control product__list--wrap'>
-        {prods}
+            {prods}
+          </div>
+          )}
+          </div>
 
-        </div>
-      </div>
     );
   }
   componentDidMount() { // first: /product/...

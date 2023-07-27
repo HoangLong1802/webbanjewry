@@ -11,6 +11,7 @@
   margin-top: 10vh;
   height: 90vh;
   background-color: var(--primary-main);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   overflow-y: scroll;
 }
 .body-admin {
@@ -46,14 +47,19 @@ figure.caption-right {
   display: flex;
   align-items: center;
 }
+figure.caption-right img{
+  background-color: var(--color-1);
+  box-shadow: var(--color-3) 0 0 2px;
+
+}
 .align-center {
   width: 90%;
-  height: 100%;
+  height: 80vh;
   margin: 1% 3% 0 3%;
   background-color: var(--color-2);
   box-shadow: 0 0 2px #000;
   padding: 2% 2% 2% 2%;
-  
+  overflow-y: hidden;
 }
 .align-valign-center {
   position: absolute;
@@ -87,16 +93,75 @@ div.float-left {
 div.float-right {
   float: right;
   position: relative;
-  width: 25%;
+  width: 40%;
+  height: 10vh;
   display: flex;
-  flex-direction: column;
-  align-items: end;
+  align-items: center;
+  justify-content: space-between;
   margin-right: 5%;
 }
-div.float-right .search{
+
+div.float-right .search .keyword{
+  width: 150px;
+  height: 30px;
+  padding: 10px 5px 10px 15px;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 0 0 2px #000;
+  
+}
+div.float-right .search .keyword:focus{
+  background-color: var(--color-3);
+  color: var(--primary-main);
+}
+div.float-right .search .btn__search{
+  border-radius: 7px;
+  height: 30px;
+  width: 70px;
+  margin-left: 5px;
+  border: none;
+  box-shadow: 0 0 2px #000;
+  cursor: pointer;
+  background-color: var(--primary-main);
+}
+div.float-right .search .btn__search:hover {
+  background-color: var(--color-3);
+  color: var(--primary-main);
+}
+div.float-right .Mycard--wrap{
+  color: red;
+}
+div.float-right .Mycard--wrap .cart--wrap{
+  width: 25px;
+  height: 25px;
+  color: black;
+  font-weight: bold;
+  margin-top: 2vh;
+  margin-left: 5px;
+}div.float-right .Mycard--wrap .cart--wrap:hover{
+  color: var(--color-3);
+}
+div.float-right .Mycard--wrap .cart--wrap.red{
+  color: rgb(149, 73, 73);
+}
+div.float-right .Mycard--wrap .cart--wrap.red:hover{
+  color: var(--color-3);
+}
+.imfor__menu--wrap a{
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.imfor__menu--wrap a:hover{
+  color: var(--color-3);
+}
+div.float-right .Mycard--wrap .CSS__number--icon{
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5vh;
+  color: red;
+  font-weight: bold;
+  right: -4px;
+  display: hidden;
 }
 div.float-clear {
   clear: both;
@@ -135,30 +200,31 @@ input.keyword {
 }
 /* header */
 tr:first-child.datatable {
-  background-color: #ffcc00;
+  background-color: var(--color-3);
+  color: white;
 }
 /* even rows, except header */
 tr:not(:first-child):nth-child(even).datatable {
-  background-color: #f5f5f5;
+  background-color: var(--primary-main);
 }
 /* odd rows, except header */
 tr:not(:first-child):nth-child(odd).datatable {
-  background-color: #ffeeaa;
+  background-color: var(--color-1);
 }
 /* except header */
 tr:not(:first-child):hover.datatable {
-  background-color: #dcfcfc;
+  background-color: var(--color-2);
   cursor: pointer;
 }
 .product_control {
   display: flex;
   width: 100%;
-  overflow: hidden;
   box-shadow: 0 0 4px var(--primary-main);
+  overflow-x: hidden;
   }
 
 .product {
-  animation:both scroll-right 240s linear infinite;
+  animation:both scroll-right 360s linear infinite;
   width: 100%;
   display: flex;
   animation-timing-function:cubic-bezier(0,0,0,0);
@@ -169,7 +235,7 @@ tr:not(:first-child):hover.datatable {
     transform: translateX(0%);
   }
   to {
-    transform: translateX(-700%); /* Di chuyển sang trái 100% chiều rộng */
+    transform: translateX(-700%); /* Di chuyển sang trái 700% chiều rộng */
   }
 }
 
@@ -196,4 +262,101 @@ tr:not(:first-child):hover.datatable {
 }
 .product__list--wrap .inline{
   margin: 0 3% 5% 0;
+}
+.align-center .css_table--wrap .table__content--wrap{
+  width: 50%;
+  height: 50%;
+  margin-top: 4vh;
+}
+.align-center .css_table--wrap {
+  background-color: var(--color-1);
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+}
+.align-center .css_table--wrap .table__content--wrap .input__css--wrap input{
+  width: 80%;
+  line-height: 5vh;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primary-main);
+  box-shadow: var(--color-3) 0 0 2px;
+}
+.align-center .css_table--wrap .table__content--wrap .input__css--wrap input:focus{
+  background-color: var(--color-3);
+  color: var(--primary-main);
+}
+.align-center .css_table--wrap .table__content--wrap .inbtn__css--wrap input{
+  cursor: pointer;
+  background-color: var(--primary-main);
+  color: var(--color-3);
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 2px var(--color-3);
+  width: 30%;
+  height: 5vh;
+  margin: 5vh 0 0 -10%;
+}
+.align-center .css_table--wrap .table__content--wrap .inbtn__css--wrap input:hover{
+  background-color: var(--color-3);
+  color: var(--primary-main);
+  box-shadow: 0 0 2px var(--primary-main);
+
+}
+.align-center .datatable{
+  width: 100%;
+  align-content: center;
+}
+.css__detail--component{
+  background-color: var(--color-1);
+  width: 100%;
+  height: 400px;
+  box-shadow: #000 0 0 2px;
+}
+.css__detail--component table{
+  width: 100%;
+  height: 60%;
+}
+
+.css__detail--component table .addtocart__css--wrap input{
+  width: 20%;
+  border: none;
+  border-radius: 5px;
+  margin: 5% 0 0 -15%;
+  height: 5vh;
+  box-shadow: var(--color-3) 0 0 2px;
+  cursor: pointer;
+}
+.css__detail--component table .addtocart__css--wrap input:hover{
+  background-color: var(--color-3);
+  color: var(--primary-main);
+}
+.css_tr--wrap{
+  padding-left: 10%;
+  line-height: 5vh;
+}
+
+tr:nth-child(even).css_tr--wrap {
+  background-color: var(--primary-main);
+}
+tr:nth-child(odd).css_tr--wrap {
+  background-color: var(--color-2);
+}
+/* except header */
+tr:hover.css_tr--wrap {
+  background-color: var(--color-3);
+  cursor: pointer;
+  color: var(--primary-main);
+}
+.css_tr--wrap .input__wrap--table{
+  width: 30%;
+  line-height: 4vh;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 2px var(--color-3);
+  padding: 2px 5px 4px 5px;
+}
+.align-center.home__align--wrap{
+  height: fit-content;
 }

@@ -25,30 +25,31 @@ class ProductDetail extends Component {
               height="400px"
               alt=""
             />
-            <figcaption>
-              <form>
+            {/* <figcaption> */}
+              <form className="css__detail--component">
                 <table>
                   <tbody>
-                    <tr>
-                      <td align="right">ID:</td>
+                    <tr className="css_tr--wrap">
+                      <td >ID:</td>
                       <td>{prod._id}</td>
                     </tr>
-                    <tr>
-                      <td align="right">Name:</td>
+                    <tr className="css_tr--wrap">
+                      <td >Name:</td>
                       <td>{prod.name}</td>
                     </tr>
-                    <tr>
-                      <td align="right">Price:</td>
+                    <tr className="css_tr--wrap">
+                      <td >Price:</td>
                       <td>{prod.price}</td>
                     </tr>
-                    <tr>
-                      <td align="right">Category:</td>
+                    <tr className="css_tr--wrap">
+                      <td >Category:</td>
                       <td>{prod.category.name}</td>
                     </tr>
-                    <tr>
-                      <td align="right">Quantity:</td>
+                    <tr className="css_tr--wrap">
+                      <td>Quantity:</td>
                       <td>
                         <input
+                          className="input__wrap--table"
                           type="number"
                           min="1"
                           max="99"
@@ -59,7 +60,7 @@ class ProductDetail extends Component {
                         />
                       </td>
                     </tr>
-                    <tr>
+                    <tr className="addtocart__css--wrap">
                       <td></td>
                       <td>
                         <input
@@ -72,7 +73,7 @@ class ProductDetail extends Component {
                   </tbody>
                 </table>
               </form>
-            </figcaption>
+            {/* </figcaption> */}
           </figure>
         </div>
       );
@@ -93,7 +94,7 @@ class ProductDetail extends Component {
         mycart[index].quantity += quantity;
       }
       this.context.setMycart(mycart);
-      alert('OK BABY!');
+      alert('Product Have Been Add To Cart!');
     } else {
       alert('Please input quantity');
     }
