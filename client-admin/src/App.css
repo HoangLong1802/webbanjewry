@@ -237,3 +237,43 @@ tr:not(:first-child):hover.datatable {
   background-size: 100px;
   cursor: pointer;
 }
+.input_productDetail--wrap input{
+  width: 90%;
+  border: none;
+  box-shadow: 0 0 2px var(--color-3);
+  border-radius: 5px;
+  background-color: var(--primary-main);
+  height: 3vh;
+  margin: 2% 0 3% 2%;
+}
+.input_productDetail--wrap input:focus{
+  background-color: var(--color-3);
+  color: var(--color-1);
+}
+.select_productDetail--wrap select{
+  width: 50%;
+  border: none;
+  box-shadow: 0 0 2px var(--color-3);
+  border-radius: 5px;
+  background-color: var(--primary-main);
+  height: 3vh;
+  cursor: pointer;
+}
+.select_productDetail--wrap select:focus{
+   background-color: var(--color-3); 
+  color: var(--primary-main);
+}
+.input_productDetail--wrap.btn_productDetail--wrap input{
+  width: 30%;
+  cursor: pointer; 
+  height: 3vh;
+}
+.input_productDetail--wrap.btn_productDetail--wrap input:hover{
+  background-color: var(--color-3);
+  color: var(--primary-main);
+}
+.input_productDetail--wrap.flie_product--wrap input{
+  background-color: var(--color-1);
+  box-shadow: none;
+  cursor: pointer;
+}

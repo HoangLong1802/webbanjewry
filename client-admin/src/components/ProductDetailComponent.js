@@ -31,34 +31,38 @@ class ProductDetail extends Component {
             <tbody>
               <tr>
                 <td>ID</td>
-                <td><input type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} readOnly={true} /></td>
+                <td className='input_productDetail--wrap'><input type="text" value={this.state.txtID} onChange={(e) => { this.setState({ txtID: e.target.value }) }} readOnly={true} /></td>
               </tr>
               <tr>
                 <td>Name</td>
-                <td><input type="text" value={this.state.txtName} onChange={(e) => { this.setState({ txtName: e.target.value }) }} /></td>
+                <td className='input_productDetail--wrap'><input type="text" value={this.state.txtName} onChange={(e) => { this.setState({ txtName: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td>Price</td>
-                <td><input type="text" value={this.state.txtPrice} onChange={(e) => { this.setState({ txtPrice: e.target.value }) }} /></td>
+                <td className='input_productDetail--wrap'><input type="text" value={this.state.txtPrice} onChange={(e) => { this.setState({ txtPrice: e.target.value }) }} /></td>
               </tr>
               <tr>
                 <td>Image</td>
-                <td><input type="file" name="fileImage" accept="image/jpeg, image/png, image/gif" onChange={(e) => this.previewImage(e)} /></td>
+                <td className='input_productDetail--wrap flie_product--wrap' ><input type="file" name="fileImage" accept="image/jpeg, image/png, image/gif" onChange={(e) => this.previewImage(e)} /></td>
               </tr>
               <tr>
                 <td>Category</td>
-                <td><select onChange={(e) => { this.setState({ cmbCategory: e.target.value }) }}>{cates}</select></td>
+                <td className='input_productDetail--wrap select_productDetail--wrap'><select onChange={(e) => { this.setState({ cmbCategory: e.target.value }) }}>{cates}</select></td>
               </tr>
               <tr>
                 <td></td>
-                <td>
+                <td className='input_productDetail--wrap btn_productDetail--wrap'>
                 <input type="submit" value="ADD NEW" onClick={(e) => this.btnAddClick(e)} />
                 <input type="submit" value="UPDATE" onClick={(e) => this.btnUpdateClick(e)} />
                 <input type="submit" value="DELETE" onClick={(e) => this.btnDeleteClick(e)} />
                 </td>
               </tr>
               <tr>
-                {this.check()}
+                {
+                  this.state.imgProduct?
+                  <td align='center' colSpan="2"><img src={this.state.imgProduct} width="300px" height="300px" alt="" /></td>
+                  :<td></td>
+                }
                 
               </tr>
             </tbody>
@@ -67,11 +71,7 @@ class ProductDetail extends Component {
       </div>
     );
   }
-  check(){
-    if(this.state.imgProduct){
-      return <td colSpan="2"><img src={this.state.imgProduct} width="300px" height="300px" alt="" /></td>
-    }
-  }
+  
   btnDeleteClick(e) {
     e.preventDefault();
     if (window.confirm('ARE YOU SURE?')) {
@@ -89,10 +89,10 @@ class ProductDetail extends Component {
     axios.delete('/api/admin/products/' + id, config).then((res) => {
       const result = res.data;
       if (result) {
-        alert('OK BABY!');
+        alert('Product Have Been Deleted');
         this.apiGetProducts();
       } else {
-        alert('SORRY BABY!');
+        alert('Product Could Not be Deleted');
       }
     });
   }
@@ -116,10 +116,10 @@ class ProductDetail extends Component {
     axios.put('/api/admin/products/' + id, prod, config).then((res) => {
       const result = res.data;
       if (result) {
-        alert('OK BABY!');
+        alert('Product Have Been Updated');
         this.apiGetProducts();
       } else {
-        alert('SORRY BABY!');
+        alert('Product Could Not Be Updated');
       }
     });
   }
@@ -142,10 +142,10 @@ class ProductDetail extends Component {
     axios.post('/api/admin/products', prod, config).then((res) => {
       const result = res.data;
       if (result) {
-        alert('OK BABY!');
+        alert('Product Have Been Added');
         this.apiGetProducts();
       } else {
-        alert('SORRY BABY!');
+        alert('Product Could Not Be Added');
       }
     });
   }

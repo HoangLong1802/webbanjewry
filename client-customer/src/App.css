@@ -360,3 +360,6 @@ tr:hover.css_tr--wrap {
 .align-center.home__align--wrap{
   height: fit-content;
 }
+.Order_detail--wrap{
+  margin-top: 10vh;
+}
