@@ -28,7 +28,7 @@ class Menu extends Component {
       <div className="border-bottom">
         <div className="float-left">
           <ul className="menu">
-            <Link className="logo" to="/"></Link>
+            <Link className="logo"  to="/"></Link>
             <li className="menu">
               <Link to="/">Home</Link>
             </li>

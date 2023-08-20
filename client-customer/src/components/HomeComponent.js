@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import video from "../assets/videos/ad_video.mp4";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -21,8 +21,7 @@ class Home extends Component {
               height="300px"
               alt=""
             />
-            {item.name}
-            <br />
+            {item.name} <br />
             Price: {item.price}
           </Link>
         </div>
@@ -38,8 +37,7 @@ class Home extends Component {
               height="300px"
               alt=""
             />
-            {item.name}
-            <br />
+            {item.name} <br />
             Price: {item.price}
           </Link>
         </div>
@@ -47,17 +45,24 @@ class Home extends Component {
     });
     return (
       <div>
+        <div class="video-background">
+          <video autoPlay muted loop playsInline>
+            <source src={video} type="video/mp4" />
+          </video>
+        </div>
+
         <div className="align-center home__align--wrap">
-          <h2 className="text-center">NEW PRODUCTS</h2>
+          <h2 className="text-center"> NEW PRODUCTS </h2>
           <div className="product_control">
             <div className="product">
-            {newprods}{newprods}{newprods}{newprods}{newprods}{newprods}{newprods}
-              </div>
+              {newprods} {newprods} {newprods} {newprods} {newprods} {newprods}
+              {newprods}
+            </div>
           </div>
         </div>
         <div className="align-center  home__align--wrap">
-          <h2 className="text-center">HOT PRODUCTS</h2>
-          <div className="product_control">{this.check(hotprods)}</div>
+          <h2 className="text-center"> HOT PRODUCTS </h2>
+          <div className="product_control"> {this.check(hotprods)} </div>
         </div>
       </div>
     );
