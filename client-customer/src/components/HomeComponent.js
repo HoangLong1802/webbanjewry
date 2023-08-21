@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import video from "../assets/videos/ad_video.mp4";
+import video from "../assets/videos/homePage/ad_video.mp4";
+import picture from "../assets/pictures/homePage/home__first.jpg"
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newprods: [],
-      hotprods: [],
+      hotprods: []
     };
   }
   render() {
@@ -21,8 +22,10 @@ class Home extends Component {
               height="300px"
               alt=""
             />
-            {item.name} <br />
-            Price: {item.price}
+            <div class="name_and_price">
+              <p>{item.name}</p>
+              <p className="css_price">Price: {item.price}</p>
+            </div>
           </Link>
         </div>
       );
@@ -37,8 +40,10 @@ class Home extends Component {
               height="300px"
               alt=""
             />
-            {item.name} <br />
-            Price: {item.price}
+            <div class="name_and_price">
+              <p>{item.name}</p>
+              <p className="css_price">Price: {item.price}</p>
+            </div>
           </Link>
         </div>
       );
@@ -46,29 +51,43 @@ class Home extends Component {
     return (
       <div>
         <div class="video-background">
-          <video autoPlay muted loop playsInline>
+          <video autoPlay muted loop playsInline> 
             <source src={video} type="video/mp4" />
           </video>
         </div>
-
-        <div className="align-center home__align--wrap">
-          <h2 className="text-center"> NEW PRODUCTS </h2>
-          <div className="product_control">
-            <div className="product">
-              {newprods} {newprods} {newprods} {newprods} {newprods} {newprods}
-              {newprods}
+        <div className="main__home--wrap">
+          <div className="mainHome__left--wrap">
+            <div className="align-center home__align--wrap">
+              <h2 className="text-center"> NEW PRODUCTS </h2>
+              <div className="product_control">
+                <div className="product">
+                  {newprods} {newprods} {newprods} {newprods} {newprods}{" "}
+                  {newprods}
+                  {newprods}
+                </div>
+              </div>
+            </div>
+            <div className="align-center  home__align--wrap">
+              <h2 className="text-center"> HOT PRODUCTS </h2>
+              <div className="product_control">
+                <div className="product">
+                  {this.check(hotprods)}</div>
+              </div>
             </div>
           </div>
+          <div className="mainHome__right--wrap">
+            {/* <img src={picture}></img> */}
+          </div>
         </div>
-        <div className="align-center  home__align--wrap">
-          <h2 className="text-center"> HOT PRODUCTS </h2>
-          <div className="product_control"> {this.check(hotprods)} </div>
-        </div>
+        
       </div>
     );
   }
+
   check(hotprods) {
-    if (this.state.hotprods.length > 0) return hotprods;
+    if (this.state.hotprods.length > 0){
+      return [hotprods,hotprods,hotprods,hotprods,hotprods,hotprods];
+    } 
   }
   componentDidMount() {
     this.apiGetNewProducts();

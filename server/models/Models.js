@@ -57,10 +57,17 @@ const OrderSchema = mongoose.Schema(
   },
   { versionKey: false }
 );
+const ContactSchema = mongoose.Schema({
+    contactName:String,
+    url:String
+  },
+  { versionKey: false, _id:false}
+);
 // models
 const Admin = mongoose.model("Admin", AdminSchema);
 const Category = mongoose.model("Category", CategorySchema);
 const Customer = mongoose.model("Customer", CustomerSchema);
 const Product = mongoose.model("Product", ProductSchema);
 const Order = mongoose.model("Order", OrderSchema);
-module.exports = { Admin, Category, Customer, Product, Order };
+const Contact = mongoose.model("Contact", ContactSchema);
+module.exports = { Admin, Category, Customer, Product, Order,Contact };
