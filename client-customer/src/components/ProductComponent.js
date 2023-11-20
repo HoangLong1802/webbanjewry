@@ -13,14 +13,14 @@ class Product extends Component {
   }
   render() {
     const prods = this.state.products.map((item) => {
-      return (
-        <div key={item._id} className="inline">
-            <Link to={'/product/' + item._id}><img src={"data:image/jpg;base64," + item.image} width="300px" height="300px" alt="" />{item.name}<br />Price: {item.price}</Link>
-        </div>
-      );
+        return (
+          <div key={item._id} className="inline">
+              <Link to={'/product/' + item._id}><img src={"data:image/jpg;base64," + item.image} width="300px" height="300px" alt="" />{item.name}<br />Price: {item.price}</Link>
+          </div>
+        );
     });
     return (
-      <div className="text-center">
+      <div className="text-center Product_css--wrap">
         <h2 className="text-center">LIST PRODUCTS</h2>
       {prods == 0?(
         

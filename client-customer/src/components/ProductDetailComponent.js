@@ -16,8 +16,8 @@ class ProductDetail extends Component {
     const prod = this.state.product;
     if (prod != null) {
       return (
-        <div className="align-center">
-          <h2 className="text-center">PRODUCT DETAILS</h2>
+        <div className="align-center Product_css--wrap">
+          <h2 className="text-center">{prod.name}</h2>
           <figure className="caption-right">
             <img
               src={"data:image/jpg;base64," + prod.image}
@@ -29,14 +29,10 @@ class ProductDetail extends Component {
               <form className="css__detail--component">
                 <table>
                   <tbody>
-                    <tr className="css_tr--wrap">
+                    {/* <tr className="css_tr--wrap">
                       <td >ID:</td>
                       <td>{prod._id}</td>
-                    </tr>
-                    <tr className="css_tr--wrap">
-                      <td >Name:</td>
-                      <td>{prod.name}</td>
-                    </tr>
+                    </tr> */}
                     <tr className="css_tr--wrap">
                       <td >Price:</td>
                       <td>{prod.price}</td>

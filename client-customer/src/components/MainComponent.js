@@ -20,6 +20,8 @@ class Main extends Component {
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path='/product/category/:cid' element={<Product />} />
+          
+          <Route path='/products' element={<Product />} />
           <Route path='/product/search/:keyword' element={<Product />} />
           <Route path='/product/:id' element={<ProductDetail />} />
           <Route path='/signup' element={<Signup />} />

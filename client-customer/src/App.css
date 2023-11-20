@@ -72,7 +72,7 @@
 
     figure.caption-right img {
         background-color: var(--color-1);
-        box-shadow: var(--color-3) 0 0 2px;
+        /* box-shadow: var(--color-3) 0 0 2px; */
     }
 
     .align-center {
@@ -80,7 +80,7 @@
         height: 80vh;
         margin: 1% 3% 0 3%;
         /* background-color: var(--color-2); */
-        box-shadow: 0 0 2px #000;
+        /* box-shadow: 0 0 2px #000; */
         padding: 2% 2% 2% 2%;
         overflow-y: hidden;
     }
@@ -135,7 +135,6 @@
             color: #000;
         }
         div.border-bottom ul.menu, .imfor__menu--wrap a{
-
         }
         div.border-bottom ul.menu li.menu a:hover, .imfor__menu--wrap a:hover{
             color: #392e2e;
@@ -168,6 +167,7 @@
         background-color: #00000050;
         box-shadow: 0 0 2px #000;
         color: white;
+        
     }
     div.float-right .search .keyword::placeholder{
         /* color: var(--even-text); */
@@ -361,10 +361,11 @@
         overflow-x: hidden;
         flex-direction: row;
         flex-wrap: wrap;
-        padding: 5% 5% 5% 5%;
+        padding: 5%;
         justify-content: flex-start;
+        align-items: center;
         background-color: var(--color-2);
-        width: 90%;
+        width: 100%;
     }
 
     .product__list--wrap .inline {
@@ -426,7 +427,7 @@
         background-color: var(--color-1);
         width: var(--full-size);
         height: 400px;
-        box-shadow: #000 0 0 2px;
+        /* box-shadow: #000 0 0 2px; */
     }
 
     .css__detail--component table {
@@ -468,6 +469,8 @@
     tr:hover.css_tr--wrap {
         background-color: var(--color-3);
         cursor: pointer;
+        border: none;
+        box-shadow: none;
         color: var(--primary-main);
     }
 
@@ -528,4 +531,12 @@
         /* height: 100%; */
         width: 45%;
         content: "";
+    }
+    li.menu .Product_menu_hover{
+        justify-content: center;
+        align-items: center;
+    }
+    .Product_css--wrap{
+        margin-top: 12vh;
+        padding: 2%;
     }
