@@ -3,125 +3,212 @@ import MyContext from "../contexts/MyContext";
 import CartUtil from "../utils/CartUtil";
 import axios from "axios";
 import withRouter from "../utils/withRouter";
+import { withLanguage } from "../components/LanguageSwitcher";
 
 class Mycart extends Component {
-  static contextType = MyContext; // using this.context to access global state
+  static contextType = MyContext;
   render() {
+    // Fallback translations in case t function is not available
+    const fallbackTranslations = {
+      cart: 'Shopping Cart',
+      home: 'Home',
+      emptyCart: 'Your Cart is Empty',
+      emptyCartMessage: 'Looks like you haven\'t added anything to your cart yet.',
+      continueShopping: 'Continue Shopping',
+      itemsInCart: 'Items in Cart',
+      orderSummary: 'Order Summary',
+      subtotal: 'Subtotal',
+      shipping: 'Shipping',
+      tax: 'Tax',
+      total: 'Total',
+      free: 'Free',
+      proceedToCheckout: 'Proceed to Checkout'
+    };
+
+    const t = this.props.t || ((key) => fallbackTranslations[key] || key);
+    
+    if (this.context.mycart.length === 0) {
+      return (
+        <div className="cart-page">
+          <div className="container">
+            <div className="cart-header">
+              <h1 className="page-title">{t('cart')}</h1>
+              <p className="cart-breadcrumb">
+                <span>{t('home')}</span> / <span>{t('cart')}</span>
+              </p>
+            </div>
+            
+            <div className="empty-cart">
+              <div className="empty-cart-icon">
+                <i className="fas fa-shopping-bag"></i>
+              </div>
+              <h2>{t('emptyCart')}</h2>
+              <p>{t('emptyCartMessage')}</p>
+              <button 
+                className="btn btn-primary"
+                onClick={() => this.props.navigate('/products')}
+              >
+                {t('continueShopping')}
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     const mycart = this.context.mycart.map((item, index) => {
       return (
-        <tr key={item.product._id} className="datatable">
-          <td>{index + 1}</td>
-          <td>{item.product._id}</td>
-          <td>{item.product.name}</td>
-          <td>{item.product.category.name}</td>
-          <td>
+        <div key={`${item.product._id}-${item.selectedSize || ''}-${item.selectedColor || ''}`} className="cart-item">
+          <div className="cart-item-image">
             <img
               src={"data:image/jpg;base64," + item.product.image}
-              width="70px"
-              height="70px"
-              alt=""
+              alt={item.product.name}
             />
-          </td>
-          <td>{item.product.price}</td>
-          <td>{item.quantity}</td>
-          <td>{item.product.price * item.quantity}</td>
-          <td>
-            <span
-              className="link"
-              onClick={() => this.lnkRemoveClick(item.product._id)}
+          </div>
+          
+          <div className="cart-item-info">
+            <h3 className="cart-item-name">{item.product.name}</h3>
+            <p className="cart-item-category">{item.product.category.name}</p>
+            {item.selectedSize && (
+              <p className="cart-item-size">Size: {item.selectedSize}</p>
+            )}
+            {item.selectedColor && (
+              <p className="cart-item-color">Color: {item.selectedColor}</p>
+            )}
+            <div className="cart-item-price">
+              <span className="price">${item.product.price}</span>
+            </div>
+          </div>
+          
+          <div className="cart-item-quantity">
+            <div className="quantity-controls">
+              <button 
+                className="quantity-btn"
+                onClick={() => this.updateQuantity(index, item.quantity - 1)}
+              >
+                -
+              </button>
+              <span className="quantity">{item.quantity}</span>
+              <button 
+                className="quantity-btn"
+                onClick={() => this.updateQuantity(index, item.quantity + 1)}
+              >
+                +
+              </button>
+            </div>
+          </div>
+          
+          <div className="cart-item-total">
+            <span className="item-total">${(item.product.price * item.quantity).toFixed(2)}</span>
+          </div>
+          
+          <div className="cart-item-remove">
+            <button 
+              className="remove-btn"
+              onClick={() => this.lnkRemoveClick(index)}
             >
-              Remove
-            </span>
-          </td>
-        </tr>
+              <i className="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
       );
     });
+
     return (
-      <div className="align-center">
-
-        <h2 className="text-center">ITEM LIST</h2>
-        {CartUtil.getTotal(this.context.mycart) > 0 ? (
-          <table className="datatable" border="1">
-            <tbody>
-              <tr className="datatable">
-                <th>No.</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Image</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Amount</th>
-                <th>Action</th>
-              </tr>
-              {mycart}
-              <tr>
-                  <td colSpan="6"></td>
-                  <td>Total</td>
-                  <td>{CartUtil.getTotal(this.context.mycart)}</td>
-                  <td>
-                  <span
-                    className="link"
-                    onClick={() => this.lnkCheckoutClick()}
-                    >
-                    CHECKOUT
-                  </span>
-                        </td>
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          <table className="datatable" border="1">
-            <tbody>
-              <tr className="datatable">
-                <h2>Don't have any product in your cart</h2>
-
-              </tr>
-              </tbody>
-              </table>
-        )}
+      <div className="cart-page">
+        <div className="container">
+          <div className="cart-header">
+            <h1 className="page-title">{t('cart')}</h1>
+            <p className="cart-breadcrumb">
+              <span>{t('home')}</span> / <span>{t('cart')}</span>
+            </p>
+          </div>
+          
+          <div className="cart-content">
+            <div className="cart-items">
+              <div className="cart-items-header">
+                <h2>{t('itemsInCart')} ({this.context.mycart.length})</h2>
+              </div>
+              
+              <div className="cart-items-list">
+                {mycart}
+              </div>
+            </div>
+            
+            <div className="cart-summary">
+              <div className="cart-summary-card">
+                <h3>{t('orderSummary')}</h3>
+                
+                <div className="summary-line">
+                  <span>{t('subtotal')}</span>
+                  <span>${CartUtil.getTotal(this.context.mycart).toFixed(2)}</span>
+                </div>
+                
+                <div className="summary-line">
+                  <span>{t('shipping')}</span>
+                  <span>{t('free')}</span>
+                </div>
+                
+                <div className="summary-line">
+                  <span>{t('tax')}</span>
+                  <span>$0.00</span>
+                </div>
+                
+                <div className="summary-divider"></div>
+                
+                <div className="summary-total">
+                  <span>{t('total')}</span>
+                  <span>${CartUtil.getTotal(this.context.mycart).toFixed(2)}</span>
+                </div>
+                
+                <button 
+                  className="checkout-btn"
+                  onClick={() => this.lnkCheckoutClick()}
+                >
+                  {t('proceedToCheckout')}
+                </button>
+                
+                <button 
+                  className="continue-shopping-btn"
+                  onClick={() => this.props.navigate('/products')}
+                >
+                  {t('continueShopping')}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
-  lnkRemoveClick(id) {
-    const mycart = this.context.mycart;
-    const index = mycart.findIndex((x) => x.product._id === id);
-    if (index !== -1) {
-      // found, remove item
-      mycart.splice(index, 1);
-      this.context.setMycart(mycart);
+  updateQuantity(itemIndex, newQuantity) {
+    if (newQuantity < 1) {
+      this.lnkRemoveClick(itemIndex);
+      return;
     }
+    
+    const mycart = [...this.context.mycart];
+    mycart[itemIndex].quantity = newQuantity;
+    this.context.setMycart(mycart);
+  }
+
+  lnkRemoveClick(itemIndex) {
+    const mycart = [...this.context.mycart];
+    mycart.splice(itemIndex, 1);
+    this.context.setMycart(mycart);
   }
   lnkCheckoutClick() {
-    if (window.confirm("ARE YOU SURE?")) {
-      if (this.context.mycart.length > 0) {
-        const total = CartUtil.getTotal(this.context.mycart);
-        const items = this.context.mycart;
-        const customer = this.context.customer;
-        if (customer) {
-          this.apiCheckout(total, items, customer);
-        } else {
-          this.props.navigate("/login");
-        }
+    if (this.context.mycart.length > 0) {
+      const customer = this.context.customer;
+      if (customer) {
+        // Redirect to payment page
+        this.props.navigate("/payment");
       } else {
-        alert("Your cart is empty");
+        this.props.navigate("/login");
       }
+    } else {
+      alert("Your cart is empty");
     }
   }
-  // apis
-  apiCheckout(total, items, customer) {
-    const body = { total: total, items: items, customer: customer };
-    const config = { headers: { "x-access-token": this.context.token } };
-    axios.post("/api/customer/checkout", body, config).then((res) => {
-      const result = res.data;
-      if (result) {
-        alert("OK BABY!");
-        this.context.setMycart([]);
-        this.props.navigate("/home");
-      } else {
-        alert("SORRY BABY!");
-      }
-    });
-  }
 }
-export default withRouter(Mycart);
+export default withRouter(withLanguage(Mycart));

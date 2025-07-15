@@ -1,6 +1,7 @@
 {
-  "name": "client-admin",
+  "name": "jewelry-store-admin",
   "version": "0.1.0",
+  "description": "Admin panel React application for jewelry e-commerce",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -38,5 +39,8 @@
     ]
   },
   "homepage": "/admin",
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "react-dev-utils": "^12.0.1"
+  }
 }

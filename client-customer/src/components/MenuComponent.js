@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import withRouter from "../utils/withRouter";
 import MyContext from "../contexts/MyContext";
+import { withLanguage } from "./LanguageSwitcher";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 class Menu extends Component {
   static contextType = MyContext;
@@ -11,106 +13,80 @@ class Menu extends Component {
     this.state = {
       categories: [],
       txtKeyword: "",
+      showProductsDropdown: false,
     };
   }
+
+  toggleProductsDropdown = () => {
+    this.setState({ showProductsDropdown: !this.state.showProductsDropdown });
+  };
+
+  closeDropdown = () => {
+    this.setState({ showProductsDropdown: false });
+  };
   render() {
     const cates = this.state.categories.map((item) => {
       return (
-        <li key={item._id} className="menu">
-          <Link className="menu" to={"/product/category/" + item._id}>
-            {item.name}
-          </Link>
-        </li>
+        <Link key={item._id} className="dropdown-link" to={"/product/category/" + item._id}>
+          {item.name}
+        </Link>
       );
     });
     return (
-      <div className="border-bottom">
-        <div className="float-left">
-          <ul className="menu">
-            <Link className="logo" to="/"></Link>
-            <li className="menu">
-              <Link to="/">Home</Link>
+      <nav className="modern-navbar">
+        <div className="navbar-container">
+          <Link className="brand-text" to="/">
+            PANJ
+          </Link>
+          
+          <ul className="nav-links">
+            <li><Link to="/" className="nav-link">{this.props.t('home')}</Link></li>
+            
+            <li className="nav-dropdown">
+              <button className="dropdown-toggle nav-link">
+                {this.props.t('products')}
+                <span className="dropdown-arrow">▼</span>
+              </button>
+              <div className="dropdown-menu">
+                <Link to="/products" className="dropdown-link">
+                  {this.props.t('allProducts')}
+                </Link>
+                {cates}
+              </div>
             </li>
-            <li className="menu">
-              <Link to="/products" className="Product_menu_hover">Product</Link>
+            
+            <li><Link to="/about" className="nav-link">{this.props.t('about')}</Link></li>
+            <li><Link to="/contact" className="nav-link">{this.props.t('contact')}</Link></li>
+            
+            {this.context.token === "" ? (
+              <>
+                <li><Link to="/login" className="nav-link">{this.props.t('login')}</Link></li>
+                <li><Link to="/signup" className="nav-link">{this.props.t('register')}</Link></li>
+              </>
+            ) : (
+              <>
+                <li><Link to="/myprofile" className="nav-link">{this.props.t('welcome')}, {this.context.customer.name}</Link></li>
+                <li><Link to="/myorders" className="nav-link">{this.props.t('myOrders')}</Link></li>
+                <li>
+                  <Link to="/home" onClick={() => this.lnkLogoutClick()} className="nav-link">
+                    {this.props.t('logout')}
+                  </Link>
+                </li>
+              </>
+            )}
+            
+            <li>
+              <Link to="/mycart" className="nav-link">
+                {this.props.t('cart')} {this.context.mycart.length > 0 && `(${this.context.mycart.length})`}
+              </Link>
             </li>
-              {cates}
+            
+            <li className="nav-dropdown">
+              <LanguageSwitcher />
+            </li>
           </ul>
         </div>
-        <div className="float-right">
-          <form className="search">
-            <input
-              type="search"
-              placeholder="Enter keyword"
-              className="keyword"
-              value={this.state.txtKeyword}
-              onChange={(e) => {
-                this.setState({ txtKeyword: e.target.value });
-              }}
-            />
-            <input
-              type="submit"
-              value="SEARCH"
-              className="btn__search"
-              onClick={(e) => this.btnSearchClick(e)}
-            />
-          </form>
-
-          {this.context.token === "" ? (
-            <div className="imfor__menu--wrap">
-              <Link to="/login">Login</Link> | <Link to="/signup">Sign-up</Link>{" "}
-              | <Link to="/active">Active</Link>
-            </div>
-          ) : (
-            <div className="imfor__menu--wrap">
-              Hello <b>{this.context.customer.name}</b> |{" "}
-              <Link to="/myorders">My orders</Link> |{" "}
-              <Link to="/myprofile">My profile</Link> |{" "}
-              <Link to="/home" onClick={() => this.lnkLogoutClick()}>
-                Logout
-              </Link>{" "}
-            </div>
-          )}
-          <div className="Mycard--wrap">
-            {this.context.mycart.length > 0 ? (
-              <Link to="/mycart">
-                <svg
-                  className="cart--wrap red"
-                  stroke="currentColor"
-                  fill="currentColor"
-                  stroke-width="0"
-                  viewBox="0 0 576 512"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path>
-                </svg>
-
-                <div className="CSS__number--icon">
-                  {this.context.mycart.length}
-                </div>
-              </Link>
-            ) : (
-              <Link to="/mycart">
-                <svg
-                  className="cart--wrap"
-                  stroke="currentColor"
-                  fill="currentColor"
-                  stroke-width="0"
-                  viewBox="0 0 576 512"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path>
-                </svg>
-              </Link>
-            )}
-          </div>
-        </div>
-        <div className="float-clear" />
-      </div>
+      </nav>
     );
   }
   btnSearchClick(e) {
@@ -146,4 +122,4 @@ class Menu extends Component {
   //   card.style.opacity = '0';
   // });
 }
-export default withRouter(Menu);
+export default withRouter(withLanguage(Menu));

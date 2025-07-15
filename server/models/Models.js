@@ -25,6 +25,25 @@ const CustomerSchema = mongoose.Schema(
     email: String,
     active: Number,
     token: String,
+    address: {
+      street: String,
+      city: String,
+      district: String,
+      ward: String,
+      postalCode: String,
+      country: String,
+      isDefault: { type: Boolean, default: false }
+    },
+    addresses: [{
+      street: String,
+      city: String,
+      district: String,
+      ward: String,
+      postalCode: String,
+      country: String,
+      isDefault: { type: Boolean, default: false },
+      label: String // Home, Office, etc.
+    }]
   },
   { versionKey: false }
 );
@@ -36,6 +55,8 @@ const ProductSchema = mongoose.Schema(
     image: String,
     cdate: Number,
     category: CategorySchema,
+    sizes: [Number], // Array of sizes from 8 to 15
+    colors: [String], // Array of available colors
   },
   { versionKey: false }
 );
@@ -43,6 +64,8 @@ const ItemSchema = mongoose.Schema(
   {
     product: ProductSchema,
     quantity: Number,
+    selectedSize: Number, // Size được chọn
+    selectedColor: String, // Color được chọn
   },
   { versionKey: false, _id: false }
 );
@@ -54,6 +77,26 @@ const OrderSchema = mongoose.Schema(
     status: String,
     customer: CustomerSchema,
     items: [ItemSchema],
+    shippingAddress: {
+      street: String,
+      city: String,
+      district: String,
+      ward: String,
+      postalCode: String,
+      country: String,
+      recipientName: String,
+      recipientPhone: String
+    },
+    orderNotes: String,
+    deliveryMethod: String, // Standard, Express, etc.
+    paymentMethod: String,
+    payment: {
+      cardNumber: String,
+      paymentMethod: String,
+      paymentStatus: String,
+      paymentMessage: String,
+      isTestMode: Boolean
+    }
   },
   { versionKey: false }
 );

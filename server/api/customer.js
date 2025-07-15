@@ -45,6 +45,10 @@ router.get("/products/:id", async function (req, res) {
   const product = await ProductDAO.selectByID(_id);
   res.json(product);
 });
+router.get("/products", async function (req, res) {
+  const products = await ProductDAO.selectAll();
+  res.json(products);
+});
 // customer
 router.post("/signup", async function (req, res) {
   const username = req.body.username;
@@ -52,32 +56,40 @@ router.post("/signup", async function (req, res) {
   const name = req.body.name;
   const phone = req.body.phone;
   const email = req.body.email;
-  const dbCust = await CustomerDAO.selectByUsernameOrEmail(username, email);
-  if (dbCust) {
-    res.json({ success: false, message: "Exists username or email" });
-  } else {
-    const now = new Date().getTime(); // milliseconds
-    const token = CryptoUtil.md5(now.toString());
-    const newCust = {
-      username: username,
-      password: password,
-      name: name,
-      phone: phone,
-      email: email,
-      active: 0,
-      token: token,
-    };
-    const result = await CustomerDAO.insert(newCust);
-    if (result) {
-      const send = await EmailUtil.send(email, result._id, token);
-      if (send) {
-        res.json({ success: true, message: "Please check email" });
-      } else {
-        res.json({ success: false, message: "Email failure" });
-      }
+  
+  // Check if username exists
+  const existingUsername = await CustomerDAO.selectByUsername(username);
+  if (existingUsername) {
+    return res.json({ success: false, message: "Username already exists" });
+  }
+  
+  // Check if email exists
+  const existingEmail = await CustomerDAO.selectByEmail(email);
+  if (existingEmail) {
+    return res.json({ success: false, message: "Email already exists" });
+  }
+  
+  const now = new Date().getTime(); // milliseconds
+  const token = CryptoUtil.md5(now.toString());
+  const newCust = {
+    username: username,
+    password: password,
+    name: name,
+    phone: phone,
+    email: email,
+    active: 0,
+    token: token,
+  };
+  const result = await CustomerDAO.insert(newCust);
+  if (result) {
+    const send = await EmailUtil.send(email, result._id, token, name);
+    if (send) {
+      res.json({ success: true, message: "Please check your email to activate your account." });
     } else {
-      res.json({ success: false, message: "Insert failure" });
+      res.json({ success: false, message: "Email sending failed. Please try again." });
     }
+  } else {
+    res.json({ success: false, message: "Insert failure" });
   }
 });
 router.post("/active", async function (req, res) {
@@ -89,42 +101,63 @@ router.post("/active", async function (req, res) {
 router.post("/login", async function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
+  
+  console.log('🔍 Login attempt:', { username, password });
+  
   if (username && password) {
-    const customer = await CustomerDAO.selectByUsernameAndPassword(
-      username,
-      password
-    );
-    if (customer) {
-      if (customer.active === 1) {
-        const token = JwtUtil.genToken();
-        res.json({
-          success: true,
-          message: "Authentication successful",
-          token: token,
-          customer: customer,
-        });
+    try {
+      const customer = await CustomerDAO.selectByUsernameAndPassword(
+        username,
+        password
+      );
+      
+      console.log('📊 Database result:', customer);
+      
+      if (customer) {
+        if (customer.active === 1) {
+          const token = JwtUtil.genToken({
+            id: customer._id,
+            username: customer.username,
+            email: customer.email
+          });
+          console.log('✅ Login successful for:', username);
+          res.json({
+            success: true,
+            message: "Authentication successful",
+            token: token,
+            customer: customer,
+          });
+        } else {
+          console.log('❌ Account not active:', username);
+          res.json({ success: false, message: "Account is deactive" });
+        }
       } else {
-        res.json({ success: false, message: "Account is deactive" });
+        console.log('❌ Invalid credentials for:', username);
+        res.json({ success: false, message: "Incorrect username or password" });
       }
-    } else {
-      res.json({ success: false, message: "Incorrect username or password" });
+    } catch (error) {
+      console.error('❌ Login error:', error);
+      res.json({ success: false, message: "Login failed" });
     }
   } else {
+    console.log('❌ Missing credentials');
     res.json({ success: false, message: "Please input username and password" });
   }
 });
-router.get("/token", JwtUtil.checkToken, function (req, res) {
+router.get("/token", JwtUtil.authenticateToken, function (req, res) {
   const token = req.headers["x-access-token"] || req.headers["authorization"];
   res.json({ success: true, message: "Token is valid", token: token });
 });
 // myprofile
-router.put("/customers/:id", JwtUtil.checkToken, async function (req, res) {
+router.put("/customers/:id", JwtUtil.authenticateToken, async function (req, res) {
   const _id = req.params.id;
   const username = req.body.username;
   const password = req.body.password;
   const name = req.body.name;
   const phone = req.body.phone;
   const email = req.body.email;
+  const addresses = req.body.addresses;
+  
   const customer = {
     _id: _id,
     username: username,
@@ -133,27 +166,118 @@ router.put("/customers/:id", JwtUtil.checkToken, async function (req, res) {
     phone: phone,
     email: email,
   };
+  
+  // Add addresses if provided
+  if (addresses) {
+    customer.addresses = addresses;
+  }
+  
   const result = await CustomerDAO.update(customer);
   res.json(result);
 });
 // mycart
-router.post("/checkout", JwtUtil.checkToken, async function (req, res) {
+router.post("/checkout", JwtUtil.authenticateToken, async function (req, res) {
   const now = new Date().getTime(); // milliseconds
   const total = req.body.total;
   const items = req.body.items;
   const customer = req.body.customer;
-  const order = {
-    cdate: now,
-    total: total,
-    status: "PENDING",
-    customer: customer,
-    items: items,
-  };
-  const result = await OrderDAO.insert(order);
-  res.json(result);
+  const payment = req.body.payment; // Payment information
+  const shippingAddress = req.body.shippingAddress;
+  const orderNotes = req.body.orderNotes;
+  const deliveryMethod = req.body.deliveryMethod;
+  
+  // Process payment (in a real application, you would integrate with a payment processor)
+  let paymentStatus = "FAILED";
+  let paymentMessage = "Payment failed";
+  
+  if (payment) {
+    if (payment.isTestMode) {
+      // Test mode - always succeed
+      paymentStatus = "SUCCESS";
+      paymentMessage = "Test payment successful";
+    } else {
+      // In a real implementation, you would call a payment processor API here
+      // For now, we'll simulate payment processing
+      if (payment.cardNumber && payment.expiryDate && payment.cvv && payment.cardholderName) {
+        // Simulate payment processing
+        const isPaymentValid = Math.random() > 0.1; // 90% success rate for demo
+        if (isPaymentValid) {
+          paymentStatus = "SUCCESS";
+          paymentMessage = "Payment processed successfully";
+        } else {
+          paymentStatus = "FAILED";
+          paymentMessage = "Payment processing failed";
+        }
+      }
+    }
+  }
+  
+  if (paymentStatus === "SUCCESS") {
+    // Update customer address if provided
+    if (shippingAddress && customer._id) {
+      try {
+        const existingCustomer = await CustomerDAO.selectByID(customer._id);
+        if (existingCustomer) {
+          // Update customer's address
+          const updateData = {
+            address: shippingAddress
+          };
+          
+          // Add to addresses array if not already present
+          if (!existingCustomer.addresses) {
+            existingCustomer.addresses = [];
+          }
+          
+          // Check if this address already exists
+          const addressExists = existingCustomer.addresses.some(addr => 
+            addr.street === shippingAddress.street &&
+            addr.city === shippingAddress.city &&
+            addr.district === shippingAddress.district
+          );
+          
+          if (!addressExists) {
+            existingCustomer.addresses.push(shippingAddress);
+            updateData.addresses = existingCustomer.addresses;
+          }
+          
+          await CustomerDAO.update(customer._id, updateData);
+        }
+      } catch (error) {
+        console.error("Error updating customer address:", error);
+      }
+    }
+    
+    const order = {
+      cdate: now,
+      total: total,
+      status: "CONFIRMED",
+      customer: customer,
+      items: items,
+      shippingAddress: shippingAddress,
+      orderNotes: orderNotes,
+      deliveryMethod: deliveryMethod || "standard",
+      payment: {
+        cardNumber: payment.cardNumber ? `****-****-****-${payment.cardNumber.slice(-4)}` : '',
+        paymentMethod: "Credit Card",
+        paymentStatus: paymentStatus,
+        paymentMessage: paymentMessage,
+        isTestMode: payment.isTestMode || false,
+        transactionId: `TXN_${now}_${Math.random().toString(36).substr(2, 9)}`,
+        processedDate: now
+      }
+    };
+    
+    const result = await OrderDAO.insert(order);
+    res.json(result);
+  } else {
+    res.status(400).json({ 
+      success: false, 
+      message: paymentMessage 
+    });
+  }
 });
 // myorders
-router.get('/orders/customer/:cid', JwtUtil.checkToken, async function (req, res) {
+router.get('/orders/customer/:cid', JwtUtil.authenticateToken, async function (req, res) {
   const _cid = req.params.cid;
   const orders = await OrderDAO.selectByCustID(_cid);
   res.json(orders);

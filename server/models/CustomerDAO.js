@@ -7,10 +7,23 @@ const CustomerDAO = {
     const customer = await Models.Customer.findOne(query);
     return customer;
   },
+  async selectByUsername(username) {
+    // Case-insensitive username search
+    const query = { username: { $regex: new RegExp(`^${username}$`, 'i') } };
+    const customer = await Models.Customer.findOne(query);
+    return customer;
+  },
+  async selectByEmail(email) {
+    const query = { email: email };
+    const customer = await Models.Customer.findOne(query);
+    return customer;
+  },
   async insert(customer) {
     const mongoose = require("mongoose");
     customer._id = new mongoose.Types.ObjectId();
+    console.log("Inserting customer:", customer);
     const result = await Models.Customer.create(customer);
+    console.log("Customer inserted successfully:", result);
     return result;
   },
   async active(_id, token, active) {
@@ -22,7 +35,11 @@ const CustomerDAO = {
     return result;
   },
   async selectByUsernameAndPassword(username, password) {
-    const query = { username: username, password: password };
+    // Case-insensitive username search
+    const query = { 
+      username: { $regex: new RegExp(`^${username}$`, 'i') }, 
+      password: password 
+    };
     const customer = await Models.Customer.findOne(query);
     return customer;
   },

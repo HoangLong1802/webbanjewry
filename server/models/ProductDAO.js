@@ -4,7 +4,7 @@ const Models = require("./Models");
 const ProductDAO = {
   async selectAll() {
     const query = {};
-    const products = await Models.Product.find(query).exec();
+    const products = await Models.Product.find(query).populate('category').exec();
     return products;
   },
   async insert(product) {
@@ -36,13 +36,13 @@ const ProductDAO = {
     return result;
   },
   async selectByID(_id) {
-    const product = await Models.Product.findById(_id).exec();
+    const product = await Models.Product.findById(_id).populate('category').exec();
     return product;
   },
   async selectTopNew(top) {
     const query = {};
     const mysort = { cdate: -1 }; // descending
-    const products = await Models.Product.find(query).sort(mysort).limit(top).exec();
+    const products = await Models.Product.find(query).populate('category').sort(mysort).limit(top).exec();
     return products;
   },
   async selectTopHot(top) {
@@ -62,12 +62,12 @@ const ProductDAO = {
   },
   async selectByCatID(_cid) {
     const query = { 'category._id': _cid };
-    const products = await Models.Product.find(query).exec();
+    const products = await Models.Product.find(query).populate('category').exec();
     return products;
   },
   async selectByKeyword(keyword) {
     const query = { name: { $regex: new RegExp(keyword, "i") } };
-    const products = await Models.Product.find(query).exec();
+    const products = await Models.Product.find(query).populate('category').exec();
     return products;
   }
 };

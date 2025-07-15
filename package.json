@@ -1,0 +1,63 @@
+{
+  "name": "jewelry-store-monorepo",
+  "version": "1.0.0",
+  "description": "Complete jewelry e-commerce platform with admin and customer interfaces",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client-admin && npm install && cd ../client-customer && npm install",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:admin\" \"npm run dev:customer\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:admin": "cd client-admin && npm start",
+    "dev:customer": "cd client-customer && npm start",
+    "build": "npm run build:admin && npm run build:customer",
+    "build:admin": "cd client-admin && npm run build",
+    "build:customer": "cd client-customer && npm run build",
+    "start": "concurrently --names \"SERVER,ADMIN,CUSTOMER\" --prefix-colors \"blue,green,yellow\" \"npm run start:server\" \"npm run start:admin\" \"npm run start:customer\"",
+    "start:server": "cd server && npm start",
+    "start:admin": "cd client-admin && npm start",
+    "start:customer": "cd client-customer && npm start",
+    "test": "npm run test:server && npm run test:admin && npm run test:customer",
+    "test:server": "cd server && npm test",
+    "test:admin": "cd client-admin && npm test -- --watchAll=false",
+    "test:customer": "cd client-customer && npm test -- --watchAll=false",
+    "lint": "npm run lint:server && npm run lint:admin && npm run lint:customer",
+    "lint:server": "cd server && eslint .",
+    "lint:admin": "cd client-admin && eslint src/",
+    "lint:customer": "cd client-customer && eslint src/",
+    "clean": "npm run clean:deps && npm run clean:builds",
+    "clean:deps": "rm -rf node_modules server/node_modules client-admin/node_modules client-customer/node_modules",
+    "clean:builds": "rm -rf client-admin/build client-customer/build",
+    "reset": "npm run clean && npm run install:all"
+  },
+  "workspaces": [
+    "server",
+    "client-admin",
+    "client-customer"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "eslint": "^8.43.0"
+  },
+  "keywords": [
+    "jewelry",
+    "ecommerce",
+    "react",
+    "nodejs",
+    "mongodb",
+    "express"
+  ],
+  "author": "Long",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HoangLong1802/webbanjewry.git"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.1.0"
+  }
+}
