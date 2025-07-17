@@ -32,6 +32,74 @@ const translations = {
     noNewProducts: 'No new products available',
     noHotProducts: 'No hot products available',
     
+    // Products Page
+    allProducts: 'All Products',
+    productsInCategory: 'Products in category',
+    noProductsFound: 'No products found',
+    noProductsInCategory: 'No products found in this category',
+    sortBy: 'Sort by',
+    sortByName: 'Name',
+    sortByPrice: 'Price',
+    sortByNewest: 'Newest',
+    sortByPopular: 'Popular',
+    priceRange: 'Price Range',
+    allPrices: 'All Prices',
+    filterBy: 'Filter by',
+    category: 'Category',
+    color: 'Color',
+    material: 'Material',
+    clearFilters: 'Clear Filters',
+    showingResults: 'Showing',
+    of: 'of',
+    results: 'results',
+    
+    // About Page
+    aboutUs: 'About Us',
+    aboutPanj: 'About PANJ',
+    aboutTitle: 'Crafting Timeless Beauty Since 2020',
+    aboutDescription: 'PANJ is Vietnam\'s premier luxury jewelry brand, dedicated to creating exquisite pieces that tell your unique story. Our master craftsmen combine traditional techniques with contemporary design to create jewelry that transcends time.',
+    ourStory: 'Our Story',
+    ourStoryText: 'Founded with a passion for exceptional craftsmanship, PANJ has become synonymous with luxury and elegance. Each piece in our collection is meticulously handcrafted using the finest materials sourced from around the world.',
+    ourMission: 'Our Mission',
+    ourMissionText: 'To bring you jewelry that celebrates life\'s most precious moments. We believe that every piece should be as unique as the person wearing it.',
+    ourVision: 'Our Vision',
+    ourVisionText: 'To be the world\'s most trusted and admired luxury jewelry brand, known for our commitment to quality, craftsmanship, and customer satisfaction.',
+    
+    // Contact Page
+    contactUs: 'Contact Us',
+    getInTouch: 'Get in Touch',
+    contactDescription: 'We\'d love to hear from you. Send us a message and we\'ll respond as soon as possible.',
+    yourName: 'Your Name',
+    yourEmail: 'Your Email',
+    subject: 'Subject',
+    message: 'Message',
+    sendMessage: 'Send Message',
+    sending: 'Sending...',
+    messageSent: 'Message sent successfully!',
+    messageError: 'Error sending message. Please try again.',
+    contactInfo: 'Contact Information',
+    address: 'Address',
+    openingHours: 'Opening Hours',
+    mondayToFriday: 'Monday - Friday',
+    saturday: 'Saturday',
+    sunday: 'Sunday',
+    closed: 'Closed',
+    owner: 'Owner',
+    linkedinProfile: 'View LinkedIn Profile',
+    businessHours: 'Business Hours',
+    daily: 'Daily',
+    fullName: 'Full Name',
+    enterName: 'Enter your name',
+    formDescription: 'Please fill out the form below and we\'ll get back to you as soon as possible.',
+    contactSubtitle: 'Get in touch with us - we\'d love to hear from you',
+    
+    // Social Login
+    continueWithGoogle: 'Continue with Google',
+    continueWithFacebook: 'Continue with Facebook',
+    signUpWithGoogle: 'Sign up with Google',
+    signUpWithFacebook: 'Sign up with Facebook',
+    socialLoginError: 'Social login failed. Please try again.',
+    
     // Features
     whyChoosePanj: 'Why Choose PANJ',
     whyChoosePanjDesc: 'We are committed to bringing you the best experiences',
@@ -428,6 +496,63 @@ const translations = {
     hotTrend: '🔥 Hot Trend',
     luxuryJewelry: 'Trang sức cao cấp từ PANJ',
     bestSeller: 'Sản phẩm bán chạy nhất',
+    noNewProducts: 'Không có sản phẩm mới',
+    noHotProducts: 'Không có sản phẩm hot',
+    
+    // Products Page
+    allProducts: 'Tất Cả Sản Phẩm',
+    productsInCategory: 'Sản phẩm trong danh mục',
+    noProductsFound: 'Không tìm thấy sản phẩm',
+    noProductsInCategory: 'Không có sản phẩm trong danh mục này',
+    sortBy: 'Sắp xếp theo',
+    sortByName: 'Tên',
+    sortByPrice: 'Giá',
+    sortByNewest: 'Mới nhất',
+    sortByPopular: 'Phổ biến',
+    priceRange: 'Khoảng Giá',
+    allPrices: 'Tất Cả Giá',
+    filterBy: 'Lọc theo',
+    category: 'Danh Mục',
+    color: 'Màu Sắc',
+    material: 'Chất Liệu',
+    clearFilters: 'Xóa Bộ Lọc',
+    showingResults: 'Hiển thị',
+    of: 'của',
+    results: 'kết quả',
+    
+    // About Page
+    aboutUs: 'Về Chúng Tôi',
+    aboutPanj: 'Về PANJ',
+    aboutTitle: 'Tạo Nên Vẻ Đẹp Vượt Thời Gian Từ 2020',
+    aboutDescription: 'PANJ là thương hiệu trang sức cao cấp hàng đầu Việt Nam.',
+    ourStory: 'Câu Chuyện Của Chúng Tôi',
+    ourStoryText: 'Được thành lập với niềm đam mê về nghề thủ công đặc biệt.',
+    ourMission: 'Sứ Mệnh',
+    ourMissionText: 'Mang đến cho bạn những món trang sức tôn vinh những khoảnh khắc quý giá.',
+    ourVision: 'Tầm Nhìn',
+    ourVisionText: 'Trở thành thương hiệu trang sức cao cấp đáng tin cậy nhất thế giới.',
+    
+    // Contact Page
+    contactUs: 'Liên Hệ',
+    getInTouch: 'Liên Hệ Với Chúng Tôi',
+    contactDescription: 'Chúng tôi rất muốn nghe từ bạn.',
+    yourName: 'Họ Tên',
+    yourEmail: 'Email',
+    subject: 'Tiêu Đề',
+    sendMessage: 'Gửi Tin Nhắn',
+    sending: 'Đang gửi...',
+    messageSent: 'Tin nhắn đã được gửi thành công!',
+    messageError: 'Lỗi khi gửi tin nhắn.',
+    contactInfo: 'Thông Tin Liên Hệ',
+    address: 'Địa Chỉ',
+    openingHours: 'Giờ Mở Cửa',
+    
+    // Social Login
+    continueWithGoogle: 'Tiếp tục với Google',
+    continueWithFacebook: 'Tiếp tục với Facebook',
+    signUpWithGoogle: 'Đăng ký với Google',
+    signUpWithFacebook: 'Đăng ký với Facebook',
+    socialLoginError: 'Đăng nhập mạng xã hội thất bại.',
     noNewProducts: 'Hiện tại chưa có sản phẩm mới',
     noHotProducts: 'Hiện tại chưa có sản phẩm hot',
     
@@ -799,6 +924,276 @@ const translations = {
     joinJourney: 'Tham Gia Hành Trình Của Chúng Tôi',
     joinDescription: 'Trở thành một phần của gia đình PANJ và khám phá những món trang sức kể câu chuyện của bạn.',
     exploreCollection: 'Khám Phá Bộ Sưu Tập',
+  },
+  ja: {
+    // Navigation
+    home: 'ホーム',
+    products: '製品',
+    about: '私たちについて',
+    contact: 'お問い合わせ',
+    login: 'ログイン',
+    register: '登録',
+    logout: 'ログアウト',
+    cart: 'カート',
+    myOrders: '注文履歴',
+    myProfile: 'プロフィール',
+    
+    // Hero Section
+    heroTitle: 'PANJ',
+    heroSubtitle: '手作りの高級ジュエリーコレクションで時代を超越した美しさを発見してください',
+    heroButton: 'コレクションを見る',
+    
+    // Products
+    newCollection: '新コレクション',
+    newCollectionDesc: '芸術と情熱で作られた最新のユニークなデザイン',
+    hotTrends: 'ホットトレンド',
+    hotTrendsDesc: 'お客様に最も愛され選ばれたジュエリー',
+    viewDetails: '詳細を見る',
+    hotTrend: '🔥 ホットトレンド',
+    luxuryJewelry: 'PANJの高級ジュエリー',
+    bestSeller: 'ベストセラー商品',
+    noNewProducts: '新しい製品はありません',
+    noHotProducts: '人気商品はありません',
+    
+    // Products Page
+    allProducts: '全ての商品',
+    productsInCategory: 'カテゴリの商品',
+    noProductsFound: '商品が見つかりません',
+    noProductsInCategory: 'このカテゴリに商品がありません',
+    sortBy: '並び替え',
+    sortByName: '名前',
+    sortByPrice: '価格',
+    sortByNewest: '新着',
+    sortByPopular: '人気',
+    priceRange: '価格帯',
+    allPrices: '全価格',
+    filterBy: 'フィルター',
+    category: 'カテゴリ',
+    color: '色',
+    material: '素材',
+    clearFilters: 'フィルターをクリア',
+    showingResults: '表示中',
+    of: '/',
+    results: '件',
+    // About Page
+    aboutUs: '私たちについて',
+    aboutSubtitle: 'PANJジュエリーの背景にある物語と、精巧な職人技への情熱をご覧ください',
+    aboutPanj: 'PANJについて',
+    aboutTitle: '2020年から時代を超越した美しさを創造',
+    aboutDescription: 'PANJはベトナムを代表する高級ジュエリーブランドです。',
+    ourStory: '私たちの物語',
+    storyParagraph1: 'PANJジュエリーは、人生の最も貴重な瞬間を祝う美しく時代を超越した作品を創造する情熱から生まれました。Trương Hoàng Longによって設立された私たちのブランドは、伝統的な職人技と現代的なデザインの完璧な融合を表しています。',
+    storyParagraph2: 'コレクションの各作品は、細部への注意を払って慎重に厳選・制作され、最高の素材のみを使用しています。ジュエリーは単なるアクセサリーではなく、あなた独自の物語と個性を表現する方法だと信じています。',
+    storyParagraph3: 'エレガントなネックレスから美しいリングまで、各作品は何世代にもわたって大切にされるようにデザインされています。品質とお客様満足への私たちのコミットメントにより、ジュエリー業界で信頼される名前となりました。',
+    meetFounder: '創設者との出会い',
+    founderTitle: 'ジュエリーデザイナー＆起業家',
+    founderDescription: 'デザインの背景と美しいジュエリー創造への情熱を持つTrương Hoàng Longは、世界中のジュエリー愛好者にユニークで高品質な作品をお届けするためにPANJジュエリーを設立しました。',
+    ourStoryText: '卓越した職人技への情熱で設立されました。',
+    ourMission: '使命',
+    ourMissionText: '人生の最も貴重な瞬間を祝うジュエリーをお届けします。',
+    ourVision: 'ビジョン',
+    ourVisionText: '世界で最も信頼され尊敬される高級ジュエリーブランドになること。',
+    findUs: 'ロケーション',
+    enterEmail: "メールアドレスを入力",
+    enterSubject: "件名を入力",
+    enterMessage: "メッセージを入力",
+    // Values Section
+    ourValues: '私たちの価値観',
+    qualityTitle: '優れた品質',
+    qualityDescription: '最高品質の素材と宝石のみを使用し、各作品が私たちの高い基準を満たすことを保証します。',
+    craftsmanshipTitle: '専門的な職人技',
+    craftsmanshipDescription: '熟練した職人が、作成するすべての作品に長年の経験をもたらします。',
+    passionTitle: '美への情熱',
+    passionDescription: '美しく意味のあるジュエリーを創造することへの愛に駆り立てられています。',
+    customerTitle: 'お客様満足',
+    customerDescription: 'お客様のニーズと期待を超えることが私たちの最優先事項です。',
+    
+    // Mission
+    missionStatement: '人生の最も貴重な瞬間の美しさを捉える特別なジュエリーを創造し、期待を超える優れたお客様体験を提供すること。',
+    goal1: '時代を超越したエレガントなジュエリーデザインを創造',
+    goal2: '高級素材と宝石のみを使用',
+    goal3: '特別なカスタマーサービスを提供',
+    goal4: 'お客様との長期的な関係を構築',
+    
+    // Numbers
+    byNumbers: 'PANJの実績',
+    happyCustomers: '満足したお客様',
+    jewelryPieces: '制作されたジュエリー',
+    uniqueDesigns: 'ユニークデザイン',
+    yearsExperience: '年の経験',
+    
+    // Join Journey
+    joinJourney: '私たちの旅に参加',
+    joinDescription: 'PANJファミリーの一員となり、あなたの物語を語るジュエリーを発見してください。',
+    exploreCollection: 'コレクションを探索',
+    
+    // Contact Page
+    contactUs: 'お問い合わせ',
+    contactSubtitle: 'お気軽にお問い合わせください',
+    getInTouch: 'ご連絡ください',
+    contactDescription: 'お気軽にお問い合わせください。できるだけ早くご返答いたします。',
+    yourName: 'お名前',
+    yourEmail: 'メールアドレス',
+    subject: '件名',
+    message: 'メッセージ',
+    sendMessage: 'メッセージを送信',
+    sending: '送信中...',
+    messageSent: 'メッセージが正常に送信されました！',
+    messageError: 'メッセージの送信に失敗しました。もう一度お試しください。',
+    contactInfo: '連絡先情報',
+    address: '住所',
+    openingHours: '営業時間',
+    owner: 'オーナー',
+    linkedinProfile: 'LinkedInプロフィールを見る',
+    businessHours: '営業時間',
+    daily: '毎日',
+    fullName: '氏名',
+    enterName: 'お名前を入力してください',
+    formDescription: '以下のフォームにご記入ください。できるだけ早くご返答いたします。',
+
+    // Social Login
+    continueWithGoogle: 'Googleで続行',
+    continueWithFacebook: 'Facebookで続行',
+    signUpWithGoogle: 'Googleで登録',
+    signUpWithFacebook: 'Facebookで登録',
+    socialLoginError: 'ソーシャルログインに失敗しました。',
+    noNewProducts: '新しい製品はありません',
+    noHotProducts: '人気商品はありません',
+    
+    // Features
+    whyChoosePanj: 'PANJを選ぶ理由',
+    whyChoosePanjDesc: '最高の体験をお届けすることをお約束します',
+    qualityTitle: '優れた品質',
+    qualityDesc: '国際基準で世界最高の素材から作られた製品',
+    designTitle: '独占デザイン',
+    designDesc: 'それぞれのジュエリーは独自の物語と複製されないユニークなデザインを持っています',
+    serviceTitle: '完璧なサービス',
+    serviceDesc: '生涯保証、送料無料、24時間365日のカスタマーケア',
+    
+    // Authentication
+    loginSubtitle: 'PANJアカウントにサインインしてください',
+    username: 'ユーザー名',
+    password: 'パスワード',
+    usernamePlaceholder: 'ユーザー名を入力してください',
+    passwordPlaceholder: 'パスワードを入力してください',
+    rememberMe: 'ログイン情報を保存',
+    forgotPassword: 'パスワードを忘れましたか？',
+    loggingIn: 'サインイン中...',
+    or: 'または',
+    continueWithGoogle: 'Googleで続行',
+    continueWithFacebook: 'Facebookで続行',
+    noAccount: 'アカウントをお持ちでない方',
+    signUp: 'サインアップ',
+    pleaseInputCredentials: 'ユーザー名とパスワードを入力してください',
+    loginFailed: 'ログインに失敗しました',
+    loginError: 'ログイン中にエラーが発生しました',
+    incorrectCredentials: 'ユーザー名またはパスワードが正しくありません。再度確認してください。',
+    accountDeactivated: 'アカウントが有効化されていません。メールを確認してアカウントを有効化してください。',
+    
+    // Sign Up
+    createAccount: 'アカウント作成',
+    signupSubtitle: 'PANJに参加して高級ジュエリーを発見してください',
+    fullName: 'フルネーム',
+    email: 'メール',
+    phone: '電話番号',
+    confirmPassword: 'パスワード確認',
+    fullNamePlaceholder: 'フルネームを入力してください',
+    emailPlaceholder: 'メールアドレスを入力してください',
+    phonePlaceholder: '電話番号を入力してください',
+    confirmPasswordPlaceholder: 'パスワードを確認してください',
+    agreeToTerms: '同意します',
+    termsAndConditions: '利用規約',
+    subscribeNewsletter: '限定オファーのニュースレターを購読する',
+    creatingAccount: 'アカウント作成中...',
+    signUpWithGoogle: 'Googleでサインアップ',
+    signUpWithFacebook: 'Facebookでサインアップ',
+    alreadyHaveAccount: 'すでにアカウントをお持ちですか？',
+    signIn: 'サインイン',
+    passwordMismatch: 'パスワードが一致しません',
+    mustAgreeToTerms: '利用規約に同意する必要があります',
+    signupSuccess: 'アカウントが正常に作成されました！アカウントを有効化するためにメールを確認してください。',
+    signupFailed: 'アカウント作成に失敗しました',
+    signupError: 'アカウント作成中にエラーが発生しました',
+    activationSent: 'アクティベーションメールが正常に送信されました',
+    usernameExists: 'ユーザー名は既に存在します',
+    emailExists: 'メールは既に存在します',
+    
+    // Common
+    loading: '読み込み中...',
+    search: '製品を検索...',
+    welcome: 'ようこそ',
+    currency: 'JPY',
+    
+    // Cart
+    emptyCart: 'カートは空です',
+    emptyCartMessage: 'カートにまだ何も追加していないようです。',
+    continueShopping: 'ショッピングを続ける',
+    addToCart: 'カートに追加',
+    quantity: '数量',
+    total: '合計',
+    subtotal: '小計',
+    tax: '税金',
+    
+    // Product Detail
+    addToWishlist: 'ウィッシュリストに追加',
+    size: 'サイズ',
+    description: '説明',
+    specifications: '仕様',
+    careInstructions: 'お手入れ方法',
+    
+    // Footer
+    footerDesc: 'ベトナムを代表する高級ジュエリーブランド。女性に永遠の美しさをもたらす精巧なジュエリーを作成しています。',
+    copyright: '© 2025 PANJ Jewelry. 全著作権所有。',
+    
+    // My Profile
+    myProfile: 'マイプロフィール',
+    personalInformation: '個人情報',
+    updateProfile: 'プロフィール更新',
+    
+    // Address Management
+    addresses: '住所',
+    addAddress: '住所を追加',
+    editAddress: '住所を編集',
+    deleteAddress: '住所を削除',
+    saveAddress: '住所を保存',
+    recipientName: '受取人名',
+    recipientPhone: '受取人電話番号',
+    streetAddress: '住所',
+    city: '市区町村',
+    country: '国',
+    postalCode: '郵便番号',
+    
+    // Payment
+    payment: '支払い',
+    paymentDetails: '支払い詳細',
+    shippingInfo: '配送情報',
+    paymentInfo: '支払い情報',
+    orderConfirmation: '注文確認',
+    deliveryMethod: '配送方法',
+    standard: '標準',
+    express: '速達',
+    orderNotes: '注文メモ',
+    next: '次へ',
+    
+    // Orders
+    myOrders: '注文履歴',
+    orderId: '注文ID',
+    orderDate: '注文日',
+    viewDetails: '詳細を見る',
+    orderDetails: '注文詳細',
+    
+    // Others
+    close: '閉じる',
+    cancel: 'キャンセル',
+    edit: '編集',
+    save: '保存',
+    delete: '削除',
+    confirm: '確認',
+    back: '戻る',
+    success: '成功',
+    error: 'エラー',
+    warning: '警告',
+    info: '情報'
   }
 };
 
@@ -807,7 +1202,7 @@ const LanguageContext = createContext();
 
 // Language Provider
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('vi'); // Default to Vietnamese
+  const [language, setLanguage] = useState('en'); // Default to English
 
   const t = (key) => {
     return translations[language][key] || key;
@@ -821,7 +1216,7 @@ export const LanguageProvider = ({ children }) => {
   // Load language from localStorage on mount
   React.useEffect(() => {
     const savedLanguage = localStorage.getItem('panj_language');
-    if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'vi')) {
+    if (savedLanguage && ['en', 'vi', 'ja'].includes(savedLanguage)) {
       setLanguage(savedLanguage);
     }
   }, []);

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withLanguage } from './LanguageSwitcher';
 import Notification from './NotificationComponent';
+import SocialLogin from './SocialLogin';
 
 class Signup extends Component {
   constructor(props) {
@@ -171,25 +172,13 @@ class Signup extends Component {
             >
               {this.state.isLoading ? t('creatingAccount') : t('createAccount')}
             </button>
-
-            <div className="auth-divider">
-              <span>{t('or')}</span>
-            </div>
-
-            <button type="button" className="auth-btn social google">
-              <span className="social-icon">🔵</span>
-              {t('signUpWithGoogle')}
-            </button>
-
-            <button type="button" className="auth-btn social facebook">
-              <span className="social-icon">🔷</span>
-              {t('signUpWithFacebook')}
-            </button>
-
-            <div className="auth-footer">
-              <p>{t('alreadyHaveAccount')} <Link to="/login" className="auth-link">{t('signIn')}</Link></p>
-            </div>
           </form>
+
+          <SocialLogin />
+
+          <div className="auth-footer">
+            <p>{t('alreadyHaveAccount')} <Link to="/login" className="auth-link">{t('signIn')}</Link></p>
+          </div>
         </div>
         
         <Notification

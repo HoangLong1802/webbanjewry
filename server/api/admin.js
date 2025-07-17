@@ -141,6 +141,13 @@ router.get('/customers', JwtUtil.authenticateToken, async function (req, res) {
   res.json(customers);
 });
 
+// GET CUSTOMER BY ID
+router.get('/customers/:id', JwtUtil.authenticateToken, async function (req, res) {
+  const _id = req.params.id;
+  const customer = await CustomerDAO.selectByID(_id);
+  res.json(customer);
+});
+
 // GET ORDERS BY CUSTOMER ID
 router.get('/orders/customer/:cid', JwtUtil.authenticateToken, async function (req, res) {
   const _cid = req.params.cid;

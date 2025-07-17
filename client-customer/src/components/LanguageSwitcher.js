@@ -10,7 +10,11 @@ const LanguageSwitcher = () => {
   };
 
   const getCurrentLanguageDisplay = () => {
-    return language === 'vi' ? '🇻🇳 VI' : '🇺🇸 EN';
+    switch(language) {
+      case 'vi': return '🇻🇳 VI';
+      case 'ja': return '🇯🇵 JP';
+      default: return '🇺🇸 EN';
+    }
   };
 
   return (
@@ -33,6 +37,13 @@ const LanguageSwitcher = () => {
           title="English"
         >
           🇺🇸 English
+        </button>
+        <button
+          className={`language-option ${language === 'ja' ? 'active' : ''}`}
+          onClick={() => handleLanguageChange('ja')}
+          title="日本語"
+        >
+          🇯🇵 日本語
         </button>
       </div>
     </div>

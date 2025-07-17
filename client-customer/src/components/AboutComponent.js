@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { withLanguage } from './LanguageSwitcher';
+import { useLanguage } from '../contexts/LanguageContext';
 
 class About extends Component {
   render() {
-    const { t } = this.props;
+    return <AboutWithLanguage />;
+  }
+}
+
+const AboutWithLanguage = () => {
+  const { t } = useLanguage();
     
     return (
       <div className="about-page">
@@ -179,7 +184,6 @@ class About extends Component {
         </div>
       </div>
     );
-  }
-}
+  };
 
-export default withLanguage(About);
+export default About;

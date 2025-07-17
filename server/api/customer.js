@@ -186,6 +186,9 @@ router.post("/checkout", JwtUtil.authenticateToken, async function (req, res) {
   const orderNotes = req.body.orderNotes;
   const deliveryMethod = req.body.deliveryMethod;
   
+  // Debug: Log the customer object to understand its structure
+  console.log("Customer object received:", JSON.stringify(customer, null, 2));
+  
   // Process payment (in a real application, you would integrate with a payment processor)
   let paymentStatus = "FAILED";
   let paymentMessage = "Payment failed";
@@ -214,9 +217,18 @@ router.post("/checkout", JwtUtil.authenticateToken, async function (req, res) {
   
   if (paymentStatus === "SUCCESS") {
     // Update customer address if provided
-    if (shippingAddress && customer._id) {
+    if (shippingAddress && customer && customer._id) {
       try {
-        const existingCustomer = await CustomerDAO.selectByID(customer._id);
+        // Ensure we have a valid customer ID
+        const customerId = customer._id && typeof customer._id === 'string' ? customer._id : 
+                          customer._id && customer._id.toString ? customer._id.toString() : null;
+        
+        if (!customerId) {
+          console.error("Invalid customer ID:", customer._id);
+          throw new Error("Invalid customer ID");
+        }
+        
+        const existingCustomer = await CustomerDAO.selectByID(customerId);
         if (existingCustomer) {
           // Update customer's address
           const updateData = {
@@ -240,7 +252,7 @@ router.post("/checkout", JwtUtil.authenticateToken, async function (req, res) {
             updateData.addresses = existingCustomer.addresses;
           }
           
-          await CustomerDAO.update(customer._id, updateData);
+          await CustomerDAO.update(customerId, updateData);
         }
       } catch (error) {
         console.error("Error updating customer address:", error);

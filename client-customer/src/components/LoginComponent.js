@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import MyContext from '../contexts/MyContext';
 import { withLanguage } from './LanguageSwitcher';
+import SocialLogin from './SocialLogin';
 
 class Login extends Component {
   static contextType = MyContext;
@@ -151,6 +152,8 @@ class Login extends Component {
                 {this.state.isLoading ? t('signingIn') : t('login')}
               </button>
             </form>
+
+            <SocialLogin />
 
             <div className="auth-footer">
               <p>{t('dontHaveAccount')} <Link to="/signup">{t('signUp')}</Link></p>

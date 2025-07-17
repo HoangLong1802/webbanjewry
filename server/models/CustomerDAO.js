@@ -64,8 +64,15 @@ const CustomerDAO = {
     return customers;
   },
   async selectByID(_id) {
-    const customer = await Models.Customer.findById(_id).exec();
-    return customer;
+    try {
+      // Convert ObjectId to string if necessary
+      const idString = typeof _id === 'object' ? _id.toString() : _id;
+      const customer = await Models.Customer.findById(idString).exec();
+      return customer;
+    } catch (error) {
+      console.error('Error in CustomerDAO.selectByID:', error);
+      return null;
+    }
   },
 };
 module.exports = CustomerDAO;

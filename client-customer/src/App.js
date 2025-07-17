@@ -5,17 +5,20 @@ import Main from "./components/MainComponent";
 import { BrowserRouter } from 'react-router-dom';
 import MyProvider from './contexts/MyProvider';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 class App extends Component {
   render() {
     return (
-      <LanguageProvider>
-        <MyProvider>
-          <BrowserRouter >
-            <Main />
-          </BrowserRouter>
-        </MyProvider>
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <MyProvider>
+            <BrowserRouter >
+              <Main />
+            </BrowserRouter>
+          </MyProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     );
   }
 }

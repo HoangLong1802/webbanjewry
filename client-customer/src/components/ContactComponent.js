@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withLanguage } from './LanguageSwitcher';
+import { useLanguage } from '../contexts/LanguageContext';
 
 class Contact extends Component {
   constructor(props) {
@@ -246,4 +246,9 @@ class Contact extends Component {
   }
 }
 
-export default withLanguage(Contact);
+const ContactWithLanguage = (props) => {
+  const { t } = useLanguage();
+  return <Contact {...props} t={t} />;
+};
+
+export default ContactWithLanguage;
