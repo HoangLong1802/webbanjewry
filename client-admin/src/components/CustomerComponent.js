@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MyContext from "../contexts/MyContext";
+import { useLanguage } from "../contexts/LanguageContext";
 import axios from "axios";
 
 class Customer extends Component {
@@ -130,13 +131,14 @@ class Customer extends Component {
       filterStatus
     } = this.state;
     
+    const { t } = this.props;
     const filteredCustomers = this.getFilteredCustomers();
 
     return (
       <div className="admin-page">
         <div className="page-header">
-          <h1 className="page-title">Customer Management</h1>
-          <p className="page-subtitle">Manage customers and orders</p>
+          <h1 className="page-title">{t('customer_management')}</h1>
+          <p className="page-subtitle">{t('view_orders_description')}</p>
         </div>
 
         <div className="admin-content">
@@ -150,7 +152,7 @@ class Customer extends Component {
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                Customer List ({filteredCustomers.length})
+                {t('customers_list')} ({filteredCustomers.length} {t('customers_found')})
               </h2>
               <div className="table-controls">
                 <div className="search-box">
@@ -161,15 +163,15 @@ class Customer extends Component {
                   <input
                     type="text"
                     className="search-input"
-                    placeholder="Search customers..."
+                    placeholder={t('search_customers')}
                     value={searchTerm}
                     onChange={this.handleSearchChange}
                   />
                 </div>
                 <select className="filter-select" value={filterStatus} onChange={this.handleFilterChange}>
-                  <option value="all">All Customers</option>
-                  <option value="active">Active Customers</option>
-                  <option value="inactive">Inactive Customers</option>
+                  <option value="all">{t('all_statuses')}</option>
+                  <option value="active">{t('customer_status_active')}</option>
+                  <option value="inactive">{t('customer_status_inactive')}</option>
                 </select>
               </div>
             </div>
@@ -178,16 +180,16 @@ class Customer extends Component {
               {isLoading ? (
                 <div className="loading-state">
                   <div className="loading-spinner"></div>
-                  <p>Loading...</p>
+                  <p>{t('loading_customers')}</p>
                 </div>
               ) : (
                 <table className="modern-table">
                   <thead>
                     <tr>
-                      <th>Customer Info</th>
-                      <th>Contact</th>
-                      <th>Status</th>
-                      <th>Actions</th>
+                      <th>{t('customer_details')}</th>
+                      <th>{t('customer_email')}</th>
+                      <th>{t('status')}</th>
+                      <th>{t('actions')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -219,7 +221,7 @@ class Customer extends Component {
                         </td>
                         <td>
                           <span className={`status-badge ${customer.active === 1 ? 'active' : 'inactive'}`}>
-                            {customer.active === 1 ? 'Active' : 'Inactive'}
+                            {customer.active === 1 ? t('customer_status_active') : t('customer_status_inactive')}
                           </span>
                         </td>
                         <td>
@@ -230,7 +232,7 @@ class Customer extends Component {
                                 e.stopPropagation();
                                 this.handleStatusToggle(customer);
                               }}
-                              title={customer.active === 1 ? 'Deactivate' : 'Send Email & Activate'}
+                              title={customer.active === 1 ? t('deactivate_customer') : t('send_email')}
                             >
                               {customer.active === 1 ? (
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -263,14 +265,14 @@ class Customer extends Component {
                     <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
                     <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
                   </svg>
-                  {showOrderDetails ? 'Order Details' : 'Customer Orders'}
+                  {showOrderDetails ? t('order_details') : t('customer_orders')}
                 </h2>
                 {showOrderDetails && (
                   <button 
                     className="btn-secondary"
                     onClick={this.handleBackToOrders}
                   >
-                    ← Back to Orders
+                    ← {t('back')}
                   </button>
                 )}
               </div>
@@ -374,4 +376,11 @@ class Customer extends Component {
   }
 }
 
-export default Customer;
+// Wrapper component with language support
+const CustomerWithLanguage = () => {
+  const { t } = useLanguage();
+  
+  return <Customer t={t} />;
+};
+
+export default CustomerWithLanguage;

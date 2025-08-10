@@ -53,24 +53,22 @@ class Menu extends Component {
           <ul className={`nav-links ${this.state.isMobileMenuOpen ? 'mobile-active' : ''}`}>
             <li><Link to="/" className="nav-link" onClick={this.closeMobileMenu}>{this.props.t('home')}</Link></li>
             
-            <li className="nav-dropdown">
+            <li className={`nav-dropdown ${this.state.showProductsDropdown ? 'active' : ''}`}>
               <button className="dropdown-toggle nav-link" onClick={this.toggleProductsDropdown}>
                 {this.props.t('products')}
                 <span className="dropdown-arrow">▼</span>
               </button>
-              {this.state.showProductsDropdown && (
-                <div className="dropdown-menu">
-                  <Link to="/products" className="dropdown-link" onClick={() => {this.closeMobileMenu(); this.closeDropdown();}}>
-                    {this.props.t('allProducts')}
-                  </Link>
-                  {cates.map(item => 
-                    React.cloneElement(item, { 
-                      onClick: () => {this.closeMobileMenu(); this.closeDropdown();},
-                      key: item.key 
-                    })
-                  )}
-                </div>
-              )}
+              <div className="dropdown-menu">
+                <Link to="/products" className="dropdown-link" onClick={() => {this.closeMobileMenu(); this.closeDropdown();}}>
+                  {this.props.t('allProducts')}
+                </Link>
+                {cates.map(item => 
+                  React.cloneElement(item, { 
+                    onClick: () => {this.closeMobileMenu(); this.closeDropdown();},
+                    key: item.key 
+                  })
+                )}
+              </div>
             </li>
             
             <li><Link to="/about" className="nav-link" onClick={this.closeMobileMenu}>{this.props.t('about')}</Link></li>

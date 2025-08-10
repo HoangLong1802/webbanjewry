@@ -62,6 +62,23 @@ class Payment extends Component {
     });
   }
 
+  // Test data auto-fill function
+  fillTestData = () => {
+    this.setState({
+      cardNumber: '4111111111111111',
+      expiryDate: '12/25',
+      cvv: '123',
+      cardholderName: 'Test User',
+      recipientName: this.context.customer.name || 'Test Recipient',
+      recipientPhone: this.context.customer.phone || '0123456789',
+      street: '123 Test Street',
+      ward: 'Test Ward',
+      city: 'Ho Chi Minh City',
+      orderNotes: 'This is a test order for payment functionality.',
+      errors: {}
+    });
+  }
+
   validateForm = () => {
     const errors = {};
     const required = ['cardNumber', 'expiryDate', 'cvv', 'cardholderName', 'recipientName', 'recipientPhone', 'street', 'city'];
@@ -162,6 +179,18 @@ class Payment extends Component {
         <div className="payment-header">
           <h1>Complete Your Order</h1>
           <p>Secure payment with SSL encryption</p>
+          
+          {/* Test Button for Development */}
+          <div className="test-controls">
+            <button 
+              type="button" 
+              onClick={this.fillTestData}
+              className="btn-test"
+              title="Fill form with test data for development"
+            >
+              🧪 Fill Test Data
+            </button>
+          </div>
         </div>
 
         <form onSubmit={this.handleSubmit} className="payment-form">
@@ -297,28 +326,62 @@ class Payment extends Component {
 
           {/* Order Notes */}
           <div className="form-section">
-            <h3>📝 Order Notes (Optional)</h3>
+            <h3>📝 Order Notes</h3>
+            <p className="section-description">Add any special instructions for your order (optional)</p>
             <textarea
               name="orderNotes"
               value={this.state.orderNotes}
               onChange={this.handleInputChange}
-              placeholder="Special instructions for your order..."
-              rows="3"
+              placeholder="Special delivery instructions, gift message, packaging preferences..."
+              rows="4"
+              className="order-notes-textarea"
             />
+            <small className="form-hint">
+              Examples: "Please handle with care - fragile items", "Gift wrapping requested", "Leave at front door"
+            </small>
           </div>
 
           {/* Submit Button */}
           <div className="form-actions">
             {this.state.errors.submit && (
-              <div className="error-message">{this.state.errors.submit}</div>
+              <div className="error-message global-error">
+                <span className="error-icon">⚠️</span>
+                {this.state.errors.submit}
+              </div>
             )}
+            
+            <div className="payment-security">
+              <span className="security-badge">
+                🔒 SSL Encrypted Payment
+              </span>
+              <span className="accepted-cards">
+                💳 Visa, Mastercard, American Express
+              </span>
+            </div>
+            
             <button 
               type="submit" 
-              className="btn-primary"
+              className="btn-primary payment-btn"
               disabled={this.state.isProcessing}
             >
-              {this.state.isProcessing ? 'Processing...' : `Place Order - $${total.toFixed(2)}`}
+              <span className="btn-content">
+                {this.state.isProcessing ? (
+                  <>
+                    <span className="loading-spinner"></span>
+                    Processing Payment...
+                  </>
+                ) : (
+                  <>
+                    <span className="btn-icon">💎</span>
+                    Complete Purchase - ${total.toFixed(2)}
+                  </>
+                )}
+              </span>
             </button>
+            
+            <p className="payment-disclaimer">
+              By clicking "Complete Purchase", you agree to our Terms of Service and Privacy Policy.
+            </p>
           </div>
         </form>
       </div>

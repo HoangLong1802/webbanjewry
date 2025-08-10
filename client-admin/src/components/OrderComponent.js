@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MyContext from '../contexts/MyContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import axios from 'axios';
 
 class Order extends Component {
@@ -118,13 +119,14 @@ class Order extends Component {
       isFullscreen
     } = this.state;
     
+    const { t } = this.props;
     const filteredOrders = this.getFilteredOrders();
 
     return (
       <div className={`admin-page ${isFullscreen ? 'fullscreen-mode' : ''}`}>
         <div className="page-header">
-          <h1 className="page-title">Order Management</h1>
-          <p className="page-subtitle">Manage and track customer orders</p>
+          <h1 className="page-title">{t('order_management')}</h1>
+          <p className="page-subtitle">{t('view_orders_description')}</p>
         </div>
 
         <div className="admin-content">
@@ -137,7 +139,7 @@ class Order extends Component {
                     <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
                     <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
                   </svg>
-                  Order List ({filteredOrders.length})
+                  {t('orders_list')} ({filteredOrders.length} {t('orders_found')})
                 </h2>
                 <div className="table-controls">
                   <div className="search-box">
@@ -384,4 +386,11 @@ class Order extends Component {
   }
 }
 
-export default Order;
+// Wrapper component with language support  
+const OrderWithLanguage = () => {
+  const { t } = useLanguage();
+  
+  return <Order t={t} />;
+};
+
+export default OrderWithLanguage;
